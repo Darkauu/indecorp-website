@@ -6,6 +6,10 @@
      contadores, acordeón FAQ, filtros del catálogo.
    ========================================================= */
 
+import { initPageTransitions } from '../../src/page-transitions.js';
+
+initPageTransitions();   // fundido al cambiar de página (compartido con el home)
+
 (function () {
   "use strict";
 
