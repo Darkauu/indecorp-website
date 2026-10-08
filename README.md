@@ -1,44 +1,56 @@
-# Indecorp · Mockup del sitio web
+# Indecorp · Sitio web
 
-Mockup navegable (v1) del sitio de **Indecorp**, empresa de renta de maquinaria pesada Caterpillar®.
-Su objetivo es validar con el cliente las páginas, la estructura de cada sección y el estilo general antes del desarrollo final.
-La distribución interna de cada página puede cambiar.
+Prototipo del sitio de alquiler de maquinaria pesada, con y sin operador.
 
-## Páginas
+- **Home (`index.html`):** prototipo con scroll animado, según el brief de esta iteración.
+- **Nosotros, Catálogo y Servicios:** mockup v1 anterior, fuera del alcance de esta iteración.
 
-| Página | Archivo | Secciones |
-| --- | --- | --- |
-| Inicio | `index.html` | Hero, franja de capacidades, cifras animadas, qué hacemos, propuesta de valor, líneas de equipos, cómo funciona, equipo humano, CTA |
-| Nosotros | `nosotros.html` | Hero, historia, línea de tiempo, misión y visión, valores, equipo, clientes, CTA |
-| Catálogo | `catalogo.html` | Hero, filtros por categoría, búsqueda por modelo, fichas con especificaciones y disponibilidad, modal "Solicitar equipo", beneficios, CTA |
-| Servicios | `servicios.html` | Hero, servicios principales (renta, traslado, operadores), respaldo, modalidades de renta, sectores, proceso, preguntas frecuentes, CTA |
+## Cómo correrlo
 
-Todas comparten header fijo, footer, botón flotante de WhatsApp y modal de cotización (insertados desde `assets/js/main.js`).
+Requiere Node 18 o superior.
 
-## Cómo verlo
+```bash
+npm install
+npm run dev       # servidor local con recarga en caliente
+npm run build     # build de producción en dist/
+npm run preview   # sirve dist/ en http://localhost:4173
+```
 
-No requiere instalación ni build: abre `index.html` en el navegador.
-También se puede publicar tal cual en GitHub Pages.
+## Home: qué incluye
+
+1. **Scroll suave** con Lenis, sincronizado con GSAP ScrollTrigger (un solo `requestAnimationFrame` vía `gsap.ticker`).
+2. **Hero por capas con parallax:** fondo, máquina recortada y polvo en primer plano, cada capa a distinta velocidad. Tiene dos botones: "Cotizar por WhatsApp" y "Ver flota".
+3. **Transición hero → flota:** la capa de polvo sube y cubre el corte entre ambas secciones.
+4. **Flota fijada (pin):** recorre 4 categorías (excavadoras, tractores, compactadoras y motoniveladoras). En móvil es un carrusel horizontal con `scroll-snap`, sin pin.
+5. **Servicios:** dos tarjetas que aparecen al entrar en pantalla.
+6. **Cifras:** 4 contadores animados.
+7. **CTA final** a pantalla completa y botón flotante de WhatsApp siempre visible.
+
+### Reglas técnicas aplicadas
+
+- Solo se animan `transform` y `opacity`. El pin también usa `pinType: 'transform'`.
+- `prefers-reduced-motion: reduce` desactiva Lenis, parallax, pin y reveals; el contenido queda estático.
+- En pantallas < 768px el parallax se reduce a la mitad y no hay pins.
+- Las imágenes van en AVIF + WebP con `width`/`height`. Las capas del hero se precargan; el resto usa `loading="lazy"`.
+- Todas las animaciones viven en un `gsap.matchMedia()`. `initHome()` devuelve `destroyHome()`, que revierte las animaciones, mata los ScrollTriggers, destruye Lenis y quita los listeners. Se llama en `pagehide` y en HMR; si el home se monta en un router, llamarla al cambiar de ruta.
 
 ## Estructura
 
 ```
-index.html, nosotros.html, catalogo.html, servicios.html
-assets/css/styles.css   estilos y animaciones (paleta en variables :root)
-assets/js/data.js       categorías y equipos del catálogo
-assets/js/main.js       componentes compartidos e interacciones
+index.html               home
+src/config.js            marca y WhatsApp provisionales ([NOMBRE], [NÚMERO])
+src/home/main.js         animaciones (Lenis + GSAP ScrollTrigger)
+src/home/home.css        estilos del home (paleta en :root)
+public/assets/img/       placeholders con dimensiones finales
+public/assets/README.md  lista de assets a producir
+nosotros.html, catalogo.html, servicios.html, assets/   mockup v1
 ```
 
-## Personalización rápida
+## Librerías
 
-- **Color de acento:** cambia `--accent` y `--accent-dark` en `assets/css/styles.css`.
-- **Equipos del catálogo:** edita `assets/js/data.js`. El catálogo y las líneas de equipos del Inicio se generan desde ahí.
-- **Teléfono, WhatsApp y correo:** objeto `CONTACT` al inicio de `assets/js/main.js`.
-- **Imágenes:** los bloques grises con etiqueta (`data-label`) son placeholders de fotos reales.
-
-## Notas
-
-- Los textos, cifras, teléfonos y clientes son de ejemplo.
-- Las especificaciones técnicas son referenciales y deben validarse con las fichas oficiales.
-- El formulario de cotización es demostrativo y no envía datos.
-- No se usa el logo de Caterpillar (marca registrada); solo se menciona la marca en texto.
+| Paquete | Uso |
+| --- | --- |
+| `gsap` (incluye ScrollTrigger) | Parallax, pin, reveals y contadores |
+| `lenis` | Scroll suave |
+| `@fontsource/barlow-condensed`, `@fontsource/inter` | Fuentes alojadas localmente: sans condensada pesada para titulares y sans neutra para texto |
+| `vite` (dev) | Servidor local y build |
