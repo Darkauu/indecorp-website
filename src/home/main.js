@@ -10,14 +10,9 @@
    ========================================================= */
 
 import Lenis from 'lenis';
-import 'lenis/dist/lenis.css';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-import '@fontsource/barlow-condensed/latin-800.css';
-import '@fontsource/inter/latin-400.css';
-import '@fontsource/inter/latin-600.css';
-import './home.css';
+// Los estilos se cargan con <link> en index.html (no desde JS) para que no haya parpadeo sin estilos.
 
 import { CONFIG, waLink } from '../config.js';
 
@@ -86,13 +81,20 @@ function heroIntro(hero) {
   // Solo en la primera carga (no al cruzar el breakpoint) y si el hero está a la vista.
   if (introPlayed || window.scrollY > hero.offsetHeight / 2) return;
   introPlayed = true;
+  const bgImg = hero.querySelector('.hero-bg img');
+  const machine = hero.querySelector('.hero-machine');
+  const dust = hero.querySelector('.hero-dust');
+  const title = hero.querySelector('h1');
+  const rest = hero.querySelectorAll('.hero-copy > :not(h1)');
+  // Valores finales explícitos: así GSAP no toma como destino el estado previo de .intro-pending.
+  gsap.set([bgImg, machine, dust, title, ...rest], { x: 0, y: 0, xPercent: 0, yPercent: 0, scale: 1, opacity: 1 });
   gsap.timeline({ defaults: { ease: 'power3.out' } })
-    .from(hero.querySelector('.hero-bg img'), { scale: 1.08, duration: 1.8 }, 0)
-    .from(hero.querySelector('.hero-machine'), { xPercent: 12, opacity: 0, duration: 1.3 }, 0.1)
-    .from(hero.querySelector('.hero-dust'), { yPercent: 30, duration: 1.4 }, 0.1)
+    .from(bgImg, { scale: 1.08, duration: 1.8 }, 0)
+    .from(machine, { xPercent: 12, opacity: 0, duration: 1.3 }, 0.1)
+    .from(dust, { yPercent: 30, duration: 1.4 }, 0.1)
     // El titular no se oculta (es candidato a LCP): solo se desplaza.
-    .from(hero.querySelector('h1'), { y: 30, duration: 0.9 }, 0)
-    .from(hero.querySelectorAll('.hero-copy > :not(h1)'), { y: 24, opacity: 0, duration: 0.8, stagger: 0.08 }, 0.15);
+    .from(title, { y: 30, duration: 0.9 }, 0)
+    .from(rest, { y: 24, opacity: 0, duration: 0.8, stagger: 0.08 }, 0.15);
 }
 
 function heroParallax(hero, k) {
@@ -260,6 +262,9 @@ export function initHome(root = document) {
 
     return () => cleanups.reverse().forEach((fn) => fn());
   });
+  // mm.add se ejecuta de forma síncrona: la intro ya fijó sus estados iniciales,
+  // así que se puede quitar el estado previo de CSS sin que se vea un salto.
+  document.documentElement.classList.remove('intro-pending');
 
   return function destroyHome() {
     mm.revert();
