@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Catálogo · Indecorp</title>
+  <meta name="description" content="Catálogo de maquinaria pesada Caterpillar disponible para renta.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body data-page="catalogo">
+
+  <!-- HERO -->
+  <section class="hero hero--page">
+    <div class="hero-bg"></div>
+    <div class="hero-machine" data-shape="loader"></div>
+    <div class="container">
+      <div class="hero-content">
+        <div class="breadcrumb"><a href="index.html">Inicio</a> / Catálogo</div>
+        <span class="eyebrow">Flota Caterpillar®</span>
+        <h1>Catálogo de<br>maquinaria pesada</h1>
+        <p>Todos los equipos se entregan inspeccionados, con soporte técnico y reemplazo asegurado.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATÁLOGO (tarjetas generadas desde assets/js/data.js) -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <div><span class="eyebrow">Equipos disponibles</span><h2>Explora por categoría</h2></div>
+      </div>
+
+      <div class="catalog-toolbar">
+        <div class="chips" id="chips" role="toolbar" aria-label="Filtrar por categoría"></div>
+        <label class="search">
+          <span data-icon="search" data-size="16"></span>
+          <input id="search" type="search" placeholder="Buscar modelo (ej. 320, D6…)" aria-label="Buscar modelo">
+        </label>
+      </div>
+
+      <div class="results-count" id="results-count" aria-live="polite"></div>
+      <div class="grid grid-3" id="catalog-grid"></div>
+      <div class="empty-state" id="empty-state">
+        <h3>No encontramos equipos con ese criterio</h3>
+        <p>Prueba con otra categoría o escríbenos: conseguimos el equipo que necesitas.</p>
+        <button class="btn btn--accent" data-quote>Solicitar equipo</button>
+      </div>
+      <p style="font-size:.78rem;color:var(--gray-500);margin-top:28px">* Especificaciones referenciales. Validar con la ficha técnica oficial de cada modelo.</p>
+    </div>
+  </section>
+
+  <!-- BENEFICIOS -->
+  <section class="section section--gray">
+    <div class="container grid grid-3">
+      <div class="feature reveal"><div class="icon-box" data-icon="shield"></div><h3>Equipos inspeccionados</h3><p>Checklist técnico antes de cada entrega.</p></div>
+      <div class="feature reveal delay-1"><div class="icon-box" data-icon="truck"></div><h3>Entrega en sitio</h3><p>Transporte con cama baja incluido en la cotización.</p></div>
+      <div class="feature reveal delay-2"><div class="icon-box" data-icon="refresh"></div><h3>Reemplazo asegurado</h3><p>Si un equipo falla, lo sustituimos sin costo.</p></div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-band">
+    <div class="container">
+      <h2>¿No encuentras el equipo que buscas?</h2>
+      <div class="btns">
+        <a class="btn btn--dark" href="#"><span data-icon="whatsapp" data-size="16"></span> WhatsApp</a>
+        <button class="btn btn--outline" data-quote>Cotiza ahora</button>
+      </div>
+    </div>
+  </section>
+
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
