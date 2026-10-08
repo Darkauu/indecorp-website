@@ -3,158 +3,276 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Indecorp · Renta de maquinaria pesada CAT</title>
-  <meta name="description" content="Renta de maquinaria pesada Caterpillar con soporte técnico, operadores y transporte.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/styles.css">
+  <title>Indecorp · Alquiler de maquinaria pesada</title>
+  <meta name="description" content="Alquiler de maquinaria pesada con y sin operador, traslado a tu obra y soporte 24/7. Cotiza por WhatsApp.">
+  <meta name="theme-color" content="#e9e5df">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+
+  <!-- Capas del hero: se precargan (resto de imágenes con loading="lazy") -->
+  <link rel="preload" as="image" type="image/avif" media="(max-width: 767px)" href="/assets/img/hero/hero-bg-mobile-828.avif" fetchpriority="high">
+  <link rel="preload" as="image" type="image/avif" media="(min-width: 768px)" imagesrcset="/assets/img/hero/hero-bg-1280.avif 1280w, /assets/img/hero/hero-bg-2560.avif 2560w" imagesizes="100vw" fetchpriority="high">
+  <link rel="preload" as="image" type="image/avif" imagesrcset="/assets/img/hero/hero-machine-800.avif 800w, /assets/img/hero/hero-machine-1600.avif 1600w" imagesizes="(max-width: 767px) 120vw, 62vw">
+  <link rel="preload" as="image" type="image/avif" imagesrcset="/assets/img/hero/hero-dust-1280.avif 1280w, /assets/img/hero/hero-dust-2560.avif 2560w" imagesizes="110vw">
+
+  <script type="module" src="/src/home/main.js"></script>
 </head>
-<body data-page="inicio">
+<body>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-bg"></div>
-    <div class="hero-machine" data-shape="excavator"></div>
-    <div class="container">
-      <div class="hero-content">
-        <span class="eyebrow">Renta de maquinaria pesada · Flota Caterpillar®</span>
-        <h1>Potencia que <span class="text-accent">mueve tu obra</span></h1>
-        <p>Más que alquilar equipos, somos el respaldo operativo de tu proyecto: flota CAT moderna, soporte técnico permanente y respuesta rápida.</p>
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="/" class="logo" aria-label="Indecorp, inicio">
+        <span class="logo-mark" aria-hidden="true">I</span>
+        <span class="logo-text">INDECORP</span>
+      </a>
+      <nav class="nav" id="nav" aria-label="Principal">
+        <a href="#flota">Flota</a>
+        <a href="#servicios">Servicios</a>
+        <a href="nosotros.html">Nosotros</a>
+        <a href="catalogo.html">Catálogo</a>
+      </nav>
+      <div class="header-actions">
+        <a class="btn btn--accent btn--sm" href="#contacto" data-wa>
+          <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg>
+          <span>Cotizar</span>
+        </a>
+        <button class="menu-toggle" aria-label="Abrir menú" aria-controls="nav" aria-expanded="false"><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <main id="contenido">
+    <!-- 1. HERO POR CAPAS -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-layer hero-bg" aria-hidden="true">
+        <picture>
+          <source media="(max-width: 767px)" type="image/avif" srcset="/assets/img/hero/hero-bg-mobile-828.avif" width="828" height="1472">
+          <source media="(max-width: 767px)" type="image/webp" srcset="/assets/img/hero/hero-bg-mobile-828.webp" width="828" height="1472">
+          <source type="image/avif" srcset="/assets/img/hero/hero-bg-1280.avif 1280w, /assets/img/hero/hero-bg-2560.avif 2560w" sizes="100vw">
+          <img src="/assets/img/hero/hero-bg-1280.webp" srcset="/assets/img/hero/hero-bg-1280.webp 1280w, /assets/img/hero/hero-bg-2560.webp 2560w" sizes="100vw" width="2560" height="1440" alt="" fetchpriority="high">
+        </picture>
+      </div>
+
+      <div class="hero-layer hero-machine" aria-hidden="true">
+        <picture>
+          <source type="image/avif" srcset="/assets/img/hero/hero-machine-800.avif 800w, /assets/img/hero/hero-machine-1600.avif 1600w" sizes="(max-width: 767px) 120vw, 62vw">
+          <img src="/assets/img/hero/hero-machine-800.webp" srcset="/assets/img/hero/hero-machine-800.webp 800w, /assets/img/hero/hero-machine-1600.webp 1600w" sizes="(max-width: 767px) 120vw, 62vw" width="1600" height="1000" alt="">
+        </picture>
+      </div>
+
+      <div class="container hero-copy">
+        <p class="eyebrow">Con y sin operador</p>
+        <h1 id="hero-title">Maquinaria pesada que no para</h1>
+        <p class="hero-lead">Alquilamos equipos listos para trabajar, los llevamos a tu obra y te respaldamos 24/7.</p>
         <div class="hero-ctas">
-          <button class="btn btn--accent" data-quote>Cotizar ahora <span class="arrow" data-icon="arrow" data-size="16"></span></button>
-          <a class="btn btn--outline-light" href="catalogo.html">Ver catálogo</a>
+          <a class="btn btn--accent" href="#contacto" data-wa>
+            <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg>
+            Cotizar por WhatsApp
+          </a>
+          <a class="btn btn--ghost" href="#flota">Ver flota</a>
         </div>
       </div>
-    </div>
-    <span class="hero-label">[ Foto / video de maquinaria en obra ]</span>
-  </section>
 
-  <!-- FRANJA -->
-  <div class="hero-strip">
-    <div class="container">
-      <div><strong>CAT</strong> 100%</div>
-      <div>Excavación</div>
-      <div>Movimiento de tierras</div>
-      <div>Compactación</div>
-      <div>Transporte</div>
-    </div>
-  </div>
+      <div class="hero-scroll" aria-hidden="true"><span></span></div>
 
-  <!-- ESTADÍSTICAS -->
-  <section class="stats">
-    <div class="container stats-grid">
-      <div class="stat reveal"><div class="stat-number"><span data-count="10">0</span><span>+</span></div><div class="stat-label">Años de experiencia</div></div>
-      <div class="stat reveal delay-1"><div class="stat-number"><span data-count="19">0</span><span>+</span></div><div class="stat-label">Equipos en flota</div></div>
-      <div class="stat reveal delay-2"><div class="stat-number"><span data-count="24">0</span><span>/7</span></div><div class="stat-label">Soporte técnico</div></div>
-      <div class="stat reveal delay-3"><div class="stat-number"><span>&lt;</span><span data-count="4">0</span><span>h</span></div><div class="stat-label">Tiempo de respuesta</div></div>
-    </div>
-  </section>
+      <!-- Capa de polvo: sube con el scroll y funde el hero con la sección siguiente -->
+      <div class="hero-layer hero-dust" aria-hidden="true">
+        <picture>
+          <source type="image/avif" srcset="/assets/img/hero/hero-dust-1280.avif 1280w, /assets/img/hero/hero-dust-2560.avif 2560w" sizes="110vw">
+          <img src="/assets/img/hero/hero-dust-1280.webp" srcset="/assets/img/hero/hero-dust-1280.webp 1280w, /assets/img/hero/hero-dust-2560.webp 2560w" sizes="110vw" width="2560" height="800" alt="">
+        </picture>
+      </div>
+    </section>
 
-  <!-- QUÉ HACEMOS -->
-  <section class="section">
-    <div class="container">
-      <div class="section-head reveal">
-        <div>
-          <span class="eyebrow">Qué hacemos</span>
-          <h2>Rentamos maquinaria pesada<br>para mover tu obra</h2>
-          <p>Dimensionamos los equipos según la escala, exigencia y condiciones del terreno, con cotizaciones a la medida de tu proyecto.</p>
+    <!-- 2. FLOTA FIJADA (pin en escritorio, carrusel con scroll-snap en móvil) -->
+    <section class="fleet" id="flota" aria-labelledby="fleet-title">
+      <div class="container fleet-inner">
+        <div class="fleet-head">
+          <div>
+            <p class="eyebrow">La flota</p>
+            <h2 id="fleet-title">Cuatro líneas para mover tu obra</h2>
+          </div>
+          <a class="link-arrow" href="catalogo.html">Catálogo completo <span aria-hidden="true">→</span></a>
         </div>
-        <a class="btn btn--outline" href="catalogo.html">Catálogo completo <span class="arrow" data-icon="arrow" data-size="16"></span></a>
-      </div>
-      <div class="grid grid-4">
-        <a class="card reveal" href="catalogo.html#excavadoras">
-          <div class="ph" data-shape="excavator" data-label="Foto excavadora"></div>
-          <div class="card-body"><h3>Excavadoras</h3><div class="meta">Caterpillar</div><span class="link-arrow">Ver categoría →</span></div>
-        </a>
-        <a class="card reveal delay-1" href="catalogo.html#retroexcavadoras">
-          <div class="ph" data-shape="backhoe" data-label="Foto retroexcavadora"></div>
-          <div class="card-body"><h3>Retroexcavadoras</h3><div class="meta">Caterpillar</div><span class="link-arrow">Ver categoría →</span></div>
-        </a>
-        <a class="card reveal delay-2" href="catalogo.html#compactadoras">
-          <div class="ph" data-shape="roller" data-label="Foto compactadora"></div>
-          <div class="card-body"><h3>Compactadoras</h3><div class="meta">Caterpillar</div><span class="link-arrow">Ver categoría →</span></div>
-        </a>
-        <a class="card reveal delay-3" href="catalogo.html#tractores">
-          <div class="ph" data-shape="dozer" data-label="Foto tractor"></div>
-          <div class="card-body"><h3>Tractores</h3><div class="meta">Caterpillar</div><span class="link-arrow">Ver categoría →</span></div>
-        </a>
-      </div>
-    </div>
-  </section>
 
-  <!-- PROPUESTA DE VALOR -->
-  <section class="section section--dark">
-    <div class="container split">
-      <div class="ph ph--dark reveal reveal-left" data-shape="loader" data-label="Foto equipo / operador"></div>
-      <div>
-        <span class="eyebrow">Propuesta de valor</span>
-        <h2 class="title-bar reveal">Garantizamos continuidad en obra</h2>
-        <div class="grid grid-2" style="margin-top:32px">
-          <div class="feature reveal"><div class="icon-box" data-icon="refresh"></div><h3>Reemplazo inmediato</h3><p>Si un equipo falla, llega otro. La obra no se detiene.</p></div>
-          <div class="feature reveal delay-1"><div class="icon-box" data-icon="cog"></div><h3>Flota moderna</h3><p>Equipos Caterpillar inspeccionados y listos para cualquier escala.</p></div>
-          <div class="feature reveal delay-2"><div class="icon-box" data-icon="users"></div><h3>Atención por proyecto</h3><p>Asesoría según tipo de obra, capacidad requerida y terreno.</p></div>
-          <div class="feature reveal delay-3"><div class="icon-box" data-icon="clock"></div><h3>Respuesta rápida</h3><p>Reacción logística y técnica ante cualquier urgencia en campo.</p></div>
+        <div class="fleet-stage">
+          <ol class="fleet-index" aria-label="Categorías">
+            <li><button type="button" data-goto="0"><span>01</span>Excavadoras</button></li>
+            <li><button type="button" data-goto="1"><span>02</span>Tractores</button></li>
+            <li><button type="button" data-goto="2"><span>03</span>Compactadoras</button></li>
+            <li><button type="button" data-goto="3"><span>04</span>Motoniveladoras</button></li>
+          </ol>
+
+          <div class="fleet-track">
+            <article class="fleet-slide">
+              <div class="fleet-media">
+                <span class="fleet-word" aria-hidden="true">Excavadoras</span>
+                <picture>
+                  <source type="image/avif" srcset="/assets/img/fleet/fleet-excavadoras-700.avif 700w, /assets/img/fleet/fleet-excavadoras-1400.avif 1400w" sizes="(max-width: 767px) 84vw, 50vw">
+                  <img src="/assets/img/fleet/fleet-excavadoras-700.webp" srcset="/assets/img/fleet/fleet-excavadoras-700.webp 700w, /assets/img/fleet/fleet-excavadoras-1400.webp 1400w" sizes="(max-width: 767px) 84vw, 50vw" width="1400" height="900" alt="Excavadora hidráulica" loading="lazy" decoding="async">
+                </picture>
+              </div>
+              <div class="fleet-copy">
+                <span class="fleet-num">01 / 04</span>
+                <h3>Excavadoras</h3>
+                <p class="fleet-spec">De 5 a 37 t · cucharón hasta 1.9 m³ · profundidad hasta 7.4 m</p>
+                <a class="link-arrow" href="#contacto" data-wa="Hola, quiero cotizar una excavadora.">Cotizar excavadora <span aria-hidden="true">→</span></a>
+              </div>
+            </article>
+
+            <article class="fleet-slide">
+              <div class="fleet-media">
+                <span class="fleet-word" aria-hidden="true">Tractores</span>
+                <picture>
+                  <source type="image/avif" srcset="/assets/img/fleet/fleet-tractores-700.avif 700w, /assets/img/fleet/fleet-tractores-1400.avif 1400w" sizes="(max-width: 767px) 84vw, 50vw">
+                  <img src="/assets/img/fleet/fleet-tractores-700.webp" srcset="/assets/img/fleet/fleet-tractores-700.webp 700w, /assets/img/fleet/fleet-tractores-1400.webp 1400w" sizes="(max-width: 767px) 84vw, 50vw" width="1400" height="900" alt="Tractor de oruga" loading="lazy" decoding="async">
+                </picture>
+              </div>
+              <div class="fleet-copy">
+                <span class="fleet-num">02 / 04</span>
+                <h3>Tractores</h3>
+                <p class="fleet-spec">De 13 a 39 t · hoja hasta 8.7 m³ · empuje y nivelación</p>
+                <a class="link-arrow" href="#contacto" data-wa="Hola, quiero cotizar un tractor de oruga.">Cotizar tractor <span aria-hidden="true">→</span></a>
+              </div>
+            </article>
+
+            <article class="fleet-slide">
+              <div class="fleet-media">
+                <span class="fleet-word" aria-hidden="true">Compactadoras</span>
+                <picture>
+                  <source type="image/avif" srcset="/assets/img/fleet/fleet-compactadoras-700.avif 700w, /assets/img/fleet/fleet-compactadoras-1400.avif 1400w" sizes="(max-width: 767px) 84vw, 50vw">
+                  <img src="/assets/img/fleet/fleet-compactadoras-700.webp" srcset="/assets/img/fleet/fleet-compactadoras-700.webp 700w, /assets/img/fleet/fleet-compactadoras-1400.webp 1400w" sizes="(max-width: 767px) 84vw, 50vw" width="1400" height="900" alt="Compactadora de rodillo" loading="lazy" decoding="async">
+                </picture>
+              </div>
+              <div class="fleet-copy">
+                <span class="fleet-num">03 / 04</span>
+                <h3>Compactadoras</h3>
+                <p class="fleet-spec">De 10 a 11 t · tambor liso o pata de cabra · suelos y asfalto</p>
+                <a class="link-arrow" href="#contacto" data-wa="Hola, quiero cotizar una compactadora.">Cotizar compactadora <span aria-hidden="true">→</span></a>
+              </div>
+            </article>
+
+            <article class="fleet-slide">
+              <div class="fleet-media">
+                <span class="fleet-word" aria-hidden="true">Motoniveladoras</span>
+                <picture>
+                  <source type="image/avif" srcset="/assets/img/fleet/fleet-motoniveladoras-700.avif 700w, /assets/img/fleet/fleet-motoniveladoras-1400.avif 1400w" sizes="(max-width: 767px) 84vw, 50vw">
+                  <img src="/assets/img/fleet/fleet-motoniveladoras-700.webp" srcset="/assets/img/fleet/fleet-motoniveladoras-700.webp 700w, /assets/img/fleet/fleet-motoniveladoras-1400.webp 1400w" sizes="(max-width: 767px) 84vw, 50vw" width="1400" height="900" alt="Motoniveladora" loading="lazy" decoding="async">
+                </picture>
+              </div>
+              <div class="fleet-copy">
+                <span class="fleet-num">04 / 04</span>
+                <h3>Motoniveladoras</h3>
+                <p class="fleet-spec">De 16 a 20 t · hoja de 3.7 m · perfilado de vías y plataformas</p>
+                <a class="link-arrow" href="#contacto" data-wa="Hola, quiero cotizar una motoniveladora.">Cotizar motoniveladora <span aria-hidden="true">→</span></a>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <div class="fleet-progress" aria-hidden="true"><span></span></div>
+        <p class="fleet-hint" aria-hidden="true">Desliza para ver más →</p>
+      </div>
+    </section>
+
+    <!-- 3. SERVICIOS -->
+    <section class="services" id="servicios" aria-labelledby="services-title">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <p class="eyebrow">Servicios</p>
+          <h2 id="services-title">Todo lo que tu obra necesita</h2>
+        </div>
+        <div class="services-grid">
+          <article class="service-card" data-reveal="0">
+            <picture>
+              <source type="image/avif" srcset="/assets/img/services/servicio-alquiler-600.avif 600w, /assets/img/services/servicio-alquiler-1200.avif 1200w" sizes="(max-width: 767px) 100vw, 50vw">
+              <img src="/assets/img/services/servicio-alquiler-600.webp" srcset="/assets/img/services/servicio-alquiler-600.webp 600w, /assets/img/services/servicio-alquiler-1200.webp 1200w" sizes="(max-width: 767px) 100vw, 50vw" width="1200" height="900" alt="Excavadora alquilada trabajando en obra" loading="lazy" decoding="async">
+            </picture>
+            <div class="service-body">
+              <h3>Alquiler con o sin operador</h3>
+              <p>Tú decides: el equipo solo o con un operador certificado. Contratos por día, semana, mes o proyecto.</p>
+              <ul class="checks">
+                <li>Equipos inspeccionados antes de cada entrega</li>
+                <li>Reemplazo inmediato si algo falla</li>
+                <li>Opción con combustible incluido</li>
+              </ul>
+              <a class="btn btn--dark" href="#contacto" data-wa="Hola, quiero alquilar maquinaria (con/sin operador).">Cotizar alquiler</a>
+            </div>
+          </article>
+          <article class="service-card" data-reveal="1">
+            <picture>
+              <source type="image/avif" srcset="/assets/img/services/servicio-traslado-600.avif 600w, /assets/img/services/servicio-traslado-1200.avif 1200w" sizes="(max-width: 767px) 100vw, 50vw">
+              <img src="/assets/img/services/servicio-traslado-600.webp" srcset="/assets/img/services/servicio-traslado-600.webp 600w, /assets/img/services/servicio-traslado-1200.webp 1200w" sizes="(max-width: 767px) 100vw, 50vw" width="1200" height="900" alt="Camión con cama baja trasladando maquinaria" loading="lazy" decoding="async">
+            </picture>
+            <div class="service-body">
+              <h3>Traslado de maquinaria</h3>
+              <p>Llevamos el equipo a tu obra con cabezal y cama baja propios, con permisos y logística incluidos.</p>
+              <ul class="checks">
+                <li>Flota propia de transporte</li>
+                <li>Cobertura nacional</li>
+                <li>Coordinación de entrega y retiro</li>
+              </ul>
+              <a class="btn btn--dark" href="#contacto" data-wa="Hola, necesito trasladar maquinaria.">Cotizar traslado</a>
+            </div>
+          </article>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- LÍNEAS DE EQUIPOS (generadas desde assets/js/data.js) -->
-  <section class="section">
-    <div class="container">
-      <div class="section-head reveal">
-        <div>
-          <span class="eyebrow">Líneas de equipos</span>
-          <h2>Flota lista para responder</h2>
-          <p>Elige la maquinaria que tu proyecto necesita.</p>
-        </div>
-        <a class="btn btn--outline" href="servicios.html">Ver servicios <span class="arrow" data-icon="arrow" data-size="16"></span></a>
+    <!-- 4. CIFRAS -->
+    <section class="stats" aria-label="Cifras">
+      <div class="container stats-grid">
+        <div class="stat"><p class="stat-num"><span data-count="10">10</span><span class="stat-unit">+</span></p><p class="stat-label">Años en obra</p></div>
+        <div class="stat"><p class="stat-num"><span data-count="40">40</span><span class="stat-unit">+</span></p><p class="stat-label">Equipos en flota</p></div>
+        <div class="stat"><p class="stat-num"><span data-count="24">24</span><span class="stat-unit">/7</span></p><p class="stat-label">Soporte técnico</p></div>
+        <div class="stat"><p class="stat-num"><span class="stat-unit">&lt;</span><span data-count="4" style="--digits:1">4</span><span class="stat-unit">h</span></p><p class="stat-label">Tiempo de respuesta</p></div>
       </div>
-      <div class="lines" id="lines"></div>
-    </div>
-  </section>
+    </section>
 
-  <!-- CÓMO FUNCIONA -->
-  <section class="section section--gray">
-    <div class="container">
-      <div class="section-head reveal">
-        <div><span class="eyebrow">Cómo funciona</span><h2>Renta en 4 pasos</h2></div>
+    <!-- 5. CTA FINAL A PANTALLA COMPLETA -->
+    <section class="cta" id="contacto" aria-labelledby="cta-title">
+      <div class="cta-bg" aria-hidden="true">
+        <picture>
+          <source media="(max-width: 767px)" type="image/avif" srcset="/assets/img/cta/cta-bg-mobile-828.avif" width="828" height="1472">
+          <source media="(max-width: 767px)" type="image/webp" srcset="/assets/img/cta/cta-bg-mobile-828.webp" width="828" height="1472">
+          <source type="image/avif" srcset="/assets/img/cta/cta-bg-1280.avif 1280w, /assets/img/cta/cta-bg-2560.avif 2560w" sizes="100vw">
+          <img src="/assets/img/cta/cta-bg-1280.webp" srcset="/assets/img/cta/cta-bg-1280.webp 1280w, /assets/img/cta/cta-bg-2560.webp 2560w" sizes="100vw" width="2560" height="1440" alt="" loading="lazy" decoding="async">
+        </picture>
       </div>
-      <div class="steps">
-        <div class="step reveal"><h3>Cuéntanos tu proyecto</h3><p>Tipo de obra, terreno, plazos y ubicación.</p></div>
-        <div class="step reveal delay-1"><h3>Recibe tu cotización</h3><p>Propuesta a la medida: por día, semana, mes o proyecto.</p></div>
-        <div class="step reveal delay-2"><h3>Entregamos en sitio</h3><p>Transporte con cama baja y equipo inspeccionado.</p></div>
-        <div class="step reveal delay-3"><h3>Soporte continuo</h3><p>Mantenimiento, técnicos 24/7 y reemplazo inmediato.</p></div>
+      <div class="container cta-copy" data-reveal>
+        <p class="eyebrow">¿Arrancas obra?</p>
+        <h2 id="cta-title">Tu máquina puede estar en sitio mañana</h2>
+        <p>Escríbenos con el tipo de obra y la ubicación. Te respondemos en minutos.</p>
+        <a class="btn btn--accent btn--lg" href="#contacto" data-wa>
+          <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg>
+          Cotizar por WhatsApp
+        </a>
+        <p class="cta-phone">o escríbenos al <strong data-wa-display>+507 0000-0000</strong></p>
       </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
-  <!-- EQUIPO -->
-  <section class="section section--dark">
-    <div class="container split">
-      <div class="reveal reveal-left">
-        <span class="eyebrow">Atención directa en obra</span>
-        <h2>Detrás de cada máquina, un equipo que responde</h2>
-        <p>Técnicos y operadores con capacidad de reacción inmediata. Asistencia y coordinación logística donde más lo necesitas.</p>
-        <a class="btn btn--outline-light" href="nosotros.html" style="margin-top:12px">Conoce al equipo <span class="arrow" data-icon="arrow" data-size="16"></span></a>
-      </div>
-      <div class="ph ph--dark reveal reveal-right" data-shape="truck" data-label="Foto del equipo humano"></div>
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <a href="/" class="logo"><span class="logo-mark" aria-hidden="true">I</span><span class="logo-text">INDECORP</span></a>
+      <nav aria-label="Pie de página">
+        <a href="#flota">Flota</a>
+        <a href="#servicios">Servicios</a>
+        <a href="nosotros.html">Nosotros</a>
+        <a href="catalogo.html">Catálogo</a>
+      </nav>
+      <p class="footer-legal">© 2026 INDECORP · Prototipo con contenido provisional</p>
     </div>
-  </section>
+  </footer>
 
-  <!-- CTA -->
-  <section class="cta-band">
-    <div class="container">
-      <h2>Tu proyecto no puede esperar. Nosotros tampoco.</h2>
-      <div class="btns">
-        <a class="btn btn--dark" href="#"><span data-icon="whatsapp" data-size="16"></span> WhatsApp</a>
-        <button class="btn btn--outline" data-quote>Cotiza ahora</button>
-      </div>
-    </div>
-  </section>
+  <!-- Botón flotante de WhatsApp (siempre visible) -->
+  <a class="wa-float" href="#contacto" data-wa aria-label="Escríbenos por WhatsApp">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg>
+  </a>
 
-  <script src="assets/js/data.js"></script>
-  <script src="assets/js/main.js"></script>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.5 0-3-.4-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.4.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></symbol>
+  </svg>
 </body>
 </html>
