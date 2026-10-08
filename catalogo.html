@@ -9,6 +9,21 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/styles.css">
+  <script>
+    // Fundido de entrada al llegar desde otra página del sitio (ver src/page-transitions.js).
+    (function () { try {
+      if (sessionStorage.getItem('indecorp:veil')) {
+        sessionStorage.removeItem('indecorp:veil');
+        var root = document.documentElement;
+        root.classList.add('route-enter');
+        var reveal = function () {
+          requestAnimationFrame(function () { requestAnimationFrame(function () { root.classList.remove('route-enter'); }); });
+        };
+        document.addEventListener('DOMContentLoaded', reveal);
+        setTimeout(reveal, 3000);   // salvavidas
+      }
+    } catch (e) {} })();
+  </script>
 </head>
 <body data-page="catalogo">
 

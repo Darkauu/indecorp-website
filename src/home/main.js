@@ -15,6 +15,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 // Los estilos se cargan con <link> en index.html (no desde JS) para que no haya parpadeo sin estilos.
 
 import { CONFIG, waLink } from '../config.js';
+import { initPageTransitions } from '../page-transitions.js';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -277,6 +278,7 @@ export function initHome(root = document) {
 
   setupWhatsApp(root);
   const cleanupMenu = setupMenu(header);
+  const cleanupPageTransitions = initPageTransitions();   // fundido al ir a otras páginas
 
   // gsap.matchMedia revierte automáticamente todas las animaciones y
   // ScrollTriggers creados dentro cuando cambia una condición o al desmontar.
@@ -316,6 +318,7 @@ export function initHome(root = document) {
     mm.revert();
     ScrollTrigger.getAll().forEach((t) => t.kill());
     cleanupMenu();
+    cleanupPageTransitions();
   };
 }
 

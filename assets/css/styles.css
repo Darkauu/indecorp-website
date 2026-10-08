@@ -4,6 +4,8 @@
    Para cambiar el acento basta con editar --accent.
    ========================================================= */
 
+@import '../../src/page-transitions.css';
+
 :root {
   --accent: #f2a900;          /* acento (placeholder, editable) */
   --accent-dark: #c98c00;
