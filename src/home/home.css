@@ -119,6 +119,10 @@ section[id] { scroll-margin-top: var(--header-h); }
 .nav-open .menu-toggle span:first-child { transform: rotate(45deg); }
 .nav-open .menu-toggle span:last-child { transform: rotate(-45deg); }
 
+/* ---------- Velo para saltar entre secciones (ver sectionTransitions) ---------- */
+.page-veil { position: fixed; inset: 0; z-index: 45; background: var(--paper); opacity: 0; visibility: hidden; pointer-events: none; }
+section[tabindex="-1"]:focus { outline: none; }
+
 /* ---------- 1. Hero por capas ---------- */
 .hero {
   position: relative; height: 100svh; min-height: 600px;

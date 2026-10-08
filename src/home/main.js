@@ -58,7 +58,7 @@ function setupMenu(header) {
 /* ---------- Scroll suave ---------- */
 
 function createSmoothScroll() {
-  const lenis = new Lenis({ autoRaf: false, anchors: true }); // las anclas respetan scroll-margin-top
+  const lenis = new Lenis({ autoRaf: false }); // las anclas internas las maneja sectionTransitions()
   const tick = (time) => lenis.raf(time * 1000);
   lenis.on('scroll', ScrollTrigger.update);
   gsap.ticker.add(tick);
@@ -70,6 +70,51 @@ function createSmoothScroll() {
       gsap.ticker.lagSmoothing(500, 33);
       lenis.destroy();
     },
+  };
+}
+
+/* ---------- Navegación a secciones: fundido en vez de un scroll largo ---------- */
+
+function sectionTransitions(root, smooth) {
+  const veil = root.querySelector('.page-veil');
+  let busy = false;
+
+  const onClick = (e) => {
+    const link = e.target.closest('a[href^="#"]');
+    if (!link || link.classList.contains('skip-link')) return;
+    const target = document.getElementById(link.getAttribute('href').slice(1));
+    if (!target) return;
+    e.preventDefault();
+    if (busy) return;
+    busy = true;
+    smooth.lenis.stop();
+
+    gsap.timeline({ onComplete: () => { busy = false; } })
+      .to(veil, { autoAlpha: 1, duration: 0.35, ease: 'power2.in' })
+      .add(() => {
+        // Con la página cubierta: salto directo (respeta scroll-margin-top).
+        // Si la sección está fijada, se apunta a su .pin-spacer: el pin la desplaza con
+        // transform y su posición visual no es el inicio real de la sección.
+        const spacer = target.parentElement.classList.contains('pin-spacer') ? target.parentElement : target;
+        smooth.lenis.scrollTo(spacer, { immediate: true, force: true });
+        ScrollTrigger.update();
+        // Las animaciones con scrub llegan ya a su estado final, sin mostrar el recorrido.
+        ScrollTrigger.getAll().forEach((st) => {
+          const scrubTween = st.getTween();   // false si el trigger no usa scrub con suavizado
+          if (scrubTween) scrubTween.progress(1);
+        });
+        history.pushState(null, '', `#${target.id}`);
+        target.setAttribute('tabindex', '-1');
+        target.focus({ preventScroll: true });
+        smooth.lenis.start();
+      })
+      .to(veil, { autoAlpha: 0, duration: 0.55, ease: 'power2.out' }, '+=0.08');
+  };
+
+  document.addEventListener('click', onClick);
+  return () => {
+    document.removeEventListener('click', onClick);
+    smooth.lenis.start();
   };
 }
 
@@ -251,6 +296,7 @@ export function initHome(root = document) {
       const k = isDesktop ? 1 : 0.5;          // parallax a la mitad en móvil
       const smooth = createSmoothScroll();
       cleanups.push(() => smooth.destroy());
+      cleanups.push(sectionTransitions(root, smooth));
 
       heroIntro(hero);
       heroParallax(hero, k);
