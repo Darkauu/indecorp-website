@@ -10,14 +10,9 @@
    ========================================================= */
 
 import Lenis from 'lenis';
-import 'lenis/dist/lenis.css';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-import '@fontsource/barlow-condensed/latin-800.css';
-import '@fontsource/inter/latin-400.css';
-import '@fontsource/inter/latin-600.css';
-import './home.css';
+// Los estilos se cargan con <link> en index.html (no desde JS) para que no haya parpadeo sin estilos.
 
 import { CONFIG, waLink } from '../config.js';
 
@@ -63,7 +58,7 @@ function setupMenu(header) {
 /* ---------- Scroll suave ---------- */
 
 function createSmoothScroll() {
-  const lenis = new Lenis({ autoRaf: false, anchors: true }); // las anclas respetan scroll-margin-top
+  const lenis = new Lenis({ autoRaf: false }); // las anclas internas las maneja sectionTransitions()
   const tick = (time) => lenis.raf(time * 1000);
   lenis.on('scroll', ScrollTrigger.update);
   gsap.ticker.add(tick);
@@ -78,6 +73,51 @@ function createSmoothScroll() {
   };
 }
 
+/* ---------- Navegación a secciones: fundido en vez de un scroll largo ---------- */
+
+function sectionTransitions(root, smooth) {
+  const veil = root.querySelector('.page-veil');
+  let busy = false;
+
+  const onClick = (e) => {
+    const link = e.target.closest('a[href^="#"]');
+    if (!link || link.classList.contains('skip-link')) return;
+    const target = document.getElementById(link.getAttribute('href').slice(1));
+    if (!target) return;
+    e.preventDefault();
+    if (busy) return;
+    busy = true;
+    smooth.lenis.stop();
+
+    gsap.timeline({ onComplete: () => { busy = false; } })
+      .to(veil, { autoAlpha: 1, duration: 0.35, ease: 'power2.in' })
+      .add(() => {
+        // Con la página cubierta: salto directo (respeta scroll-margin-top).
+        // Si la sección está fijada, se apunta a su .pin-spacer: el pin la desplaza con
+        // transform y su posición visual no es el inicio real de la sección.
+        const spacer = target.parentElement.classList.contains('pin-spacer') ? target.parentElement : target;
+        smooth.lenis.scrollTo(spacer, { immediate: true, force: true });
+        ScrollTrigger.update();
+        // Las animaciones con scrub llegan ya a su estado final, sin mostrar el recorrido.
+        ScrollTrigger.getAll().forEach((st) => {
+          const scrubTween = st.getTween();   // false si el trigger no usa scrub con suavizado
+          if (scrubTween) scrubTween.progress(1);
+        });
+        history.pushState(null, '', `#${target.id}`);
+        target.setAttribute('tabindex', '-1');
+        target.focus({ preventScroll: true });
+        smooth.lenis.start();
+      })
+      .to(veil, { autoAlpha: 0, duration: 0.55, ease: 'power2.out' }, '+=0.08');
+  };
+
+  document.addEventListener('click', onClick);
+  return () => {
+    document.removeEventListener('click', onClick);
+    smooth.lenis.start();
+  };
+}
+
 /* ---------- Hero ---------- */
 
 let introPlayed = false;
@@ -86,13 +126,20 @@ function heroIntro(hero) {
   // Solo en la primera carga (no al cruzar el breakpoint) y si el hero está a la vista.
   if (introPlayed || window.scrollY > hero.offsetHeight / 2) return;
   introPlayed = true;
+  const bgImg = hero.querySelector('.hero-bg img');
+  const machine = hero.querySelector('.hero-machine');
+  const dust = hero.querySelector('.hero-dust');
+  const title = hero.querySelector('h1');
+  const rest = hero.querySelectorAll('.hero-copy > :not(h1)');
+  // Valores finales explícitos: así GSAP no toma como destino el estado previo de .intro-pending.
+  gsap.set([bgImg, machine, dust, title, ...rest], { x: 0, y: 0, xPercent: 0, yPercent: 0, scale: 1, opacity: 1 });
   gsap.timeline({ defaults: { ease: 'power3.out' } })
-    .from(hero.querySelector('.hero-bg img'), { scale: 1.08, duration: 1.8 }, 0)
-    .from(hero.querySelector('.hero-machine'), { xPercent: 12, opacity: 0, duration: 1.3 }, 0.1)
-    .from(hero.querySelector('.hero-dust'), { yPercent: 30, duration: 1.4 }, 0.1)
+    .from(bgImg, { scale: 1.08, duration: 1.8 }, 0)
+    .from(machine, { xPercent: 12, opacity: 0, duration: 1.3 }, 0.1)
+    .from(dust, { yPercent: 30, duration: 1.4 }, 0.1)
     // El titular no se oculta (es candidato a LCP): solo se desplaza.
-    .from(hero.querySelector('h1'), { y: 30, duration: 0.9 }, 0)
-    .from(hero.querySelectorAll('.hero-copy > :not(h1)'), { y: 24, opacity: 0, duration: 0.8, stagger: 0.08 }, 0.15);
+    .from(title, { y: 30, duration: 0.9 }, 0)
+    .from(rest, { y: 24, opacity: 0, duration: 0.8, stagger: 0.08 }, 0.15);
 }
 
 function heroParallax(hero, k) {
@@ -249,6 +296,7 @@ export function initHome(root = document) {
       const k = isDesktop ? 1 : 0.5;          // parallax a la mitad en móvil
       const smooth = createSmoothScroll();
       cleanups.push(() => smooth.destroy());
+      cleanups.push(sectionTransitions(root, smooth));
 
       heroIntro(hero);
       heroParallax(hero, k);
@@ -260,6 +308,9 @@ export function initHome(root = document) {
 
     return () => cleanups.reverse().forEach((fn) => fn());
   });
+  // mm.add se ejecuta de forma síncrona: la intro ya fijó sus estados iniciales,
+  // así que se puede quitar el estado previo de CSS sin que se vea un salto.
+  document.documentElement.classList.remove('intro-pending');
 
   return function destroyHome() {
     mm.revert();
