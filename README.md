@@ -7,7 +7,7 @@ Prototipo del sitio de alquiler de maquinaria pesada, con y sin operador.
 
 ## Cómo correrlo
 
-Requiere Node 18 o superior.
+Requiere Node 20.19 o superior (o 22.12+), según pide Vite 8.
 
 ```bash
 npm install
