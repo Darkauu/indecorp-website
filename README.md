@@ -21,7 +21,7 @@ npm run preview   # sirve dist/ en http://localhost:4173
 1. **Scroll suave** con Lenis, sincronizado con GSAP ScrollTrigger (un solo `requestAnimationFrame` vía `gsap.ticker`).
 2. **Hero por capas con parallax:** fondo, máquina recortada y polvo en primer plano, cada capa a distinta velocidad. Tiene dos botones: "Cotizar por WhatsApp" y "Ver flota".
 3. **Transición hero → flota:** la capa de polvo sube y cubre el corte entre ambas secciones.
-4. **Flota fijada (pin):** recorre 4 categorías (excavadoras, tractores, compactadoras y motoniveladoras). En móvil es un carrusel horizontal con `scroll-snap`, sin pin.
+4. **Flota fijada (pin):** recorre 3 categorías (excavadoras, tractores y compactadoras). En móvil es un carrusel horizontal con `scroll-snap`, sin pin.
 5. **Servicios:** dos tarjetas que aparecen al entrar en pantalla.
 6. **Cifras:** 4 contadores animados.
 7. **CTA final** a pantalla completa y botón flotante de WhatsApp siempre visible.
@@ -34,11 +34,17 @@ npm run preview   # sirve dist/ en http://localhost:4173
 - Las imágenes van en AVIF + WebP con `width`/`height`. Las capas del hero se precargan; el resto usa `loading="lazy"`.
 - Todas las animaciones viven en un `gsap.matchMedia()`. `initHome()` devuelve `destroyHome()`, que revierte las animaciones, mata los ScrollTriggers, destruye Lenis y quita los listeners. Se llama en `pagehide` y en HMR; si el home se monta en un router, llamarla al cambiar de ruta.
 
+## Navbar compartido
+
+Todas las páginas usan el mismo navbar: `src/shared/navbar.html` (marcado), `navbar.css` y `navbar.js`.
+Vite lo inserta al compilar donde cada página tenga `<!-- navbar -->` y marca el enlace activo (plugin en `vite.config.js`), así que se edita en un solo lugar.
+
 ## Estructura
 
 ```
 index.html               home
 src/config.js            marca y WhatsApp provisionales ([NOMBRE], [NÚMERO])
+src/shared/navbar.*      navbar compartido por todas las páginas
 src/home/main.js         animaciones (Lenis + GSAP ScrollTrigger)
 src/home/home.css        estilos del home (paleta en :root)
 public/assets/img/       placeholders con dimensiones finales

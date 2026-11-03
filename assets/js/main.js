@@ -7,6 +7,7 @@
    ========================================================= */
 
 import { initPageTransitions } from '../../src/page-transitions.js';
+import { setupNavbar } from '../../src/shared/navbar.js';
 
 initPageTransitions();   // fundido al cambiar de página (compartido con el home)
 
@@ -94,19 +95,6 @@ initPageTransitions();   // fundido al cambiar de página (compartido con el hom
     { id: "servicios", label: "Servicios", href: "servicios.html" }
   ];
 
-  var headerHtml =
-    '<header class="site-header" id="top">' +
-    '<div class="container header-inner">' +
-    '<a href="index.html" class="logo" aria-label="Indecorp inicio"><span class="logo-mark">I</span><span>INDECORP<small>RENTA DE MAQUINARIA</small></span></a>' +
-    '<nav class="nav" id="nav">' +
-    NAV.map(function (n) { return '<a href="' + n.href + '"' + (n.id === page ? ' class="active" aria-current="page"' : "") + ">" + n.label + "</a>"; }).join("") +
-    "</nav>" +
-    '<div class="header-actions">' +
-    '<a class="header-phone" href="tel:' + CONTACT.phone.replace(/\s/g, "") + '">' + icon("phone", 16) + CONTACT.phone + "</a>" +
-    '<button class="btn btn--accent" data-quote>Cotizar</button>' +
-    '<button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span><span></span></button>' +
-    "</div></div></header>";
-
   var footerHtml =
     '<footer class="site-footer"><div class="container">' +
     '<div class="footer-grid">' +
@@ -147,7 +135,6 @@ initPageTransitions();   // fundido al cambiar de página (compartido con el hom
     '<div class="form-success"><div class="icon-box" style="margin:0 auto 16px">' + icon("check", 22) + '</div><h3>¡Solicitud recibida!</h3><p>Un asesor le contactará en breve.</p><button class="btn btn--outline" data-close>Cerrar</button></div>' +
     "</div></div>";
 
-  document.body.insertAdjacentHTML("afterbegin", headerHtml);
   document.body.insertAdjacentHTML("beforeend", footerHtml + modalHtml);
 
   /* ---------- Reemplazo de íconos y placeholders declarativos ---------- */
@@ -158,19 +145,8 @@ initPageTransitions();   // fundido al cambiar de página (compartido con el hom
     el.insertAdjacentHTML("afterbegin", machineSvg(el.getAttribute("data-shape")));
   });
 
-  /* ---------- Header: estado al hacer scroll + menú móvil ---------- */
-  var header = document.querySelector(".site-header");
-  var onScroll = function () { header.classList.toggle("is-scrolled", window.scrollY > 40); };
-  window.addEventListener("scroll", onScroll, { passive: true });
-  onScroll();
-
-  var toggle = document.querySelector(".menu-toggle");
-  var nav = document.getElementById("nav");
-  toggle.addEventListener("click", function () {
-    var open = nav.classList.toggle("is-open");
-    toggle.classList.toggle("is-open", open);
-    toggle.setAttribute("aria-expanded", String(open));
-  });
+  /* ---------- Navbar compartido (src/shared/navbar.*) ---------- */
+  setupNavbar();
 
   /* ---------- Modal de cotización ---------- */
   var modal = document.getElementById("quote-modal");
@@ -229,7 +205,7 @@ initPageTransitions();   // fundido al cambiar de página (compartido con el hom
       var c = catById[m.cat];
       return '<article class="card machine" data-cat="' + m.cat + '" data-text="' + (m.model + " " + m.type + " " + c.name).toLowerCase() + '">' +
         '<div class="ph" data-label="Foto CAT ' + m.model + '">' + machineSvg(c.shape) +
-        '<span class="availability' + (m.available ? "" : " is-busy") + '">' + (m.available ? "Disponible" : "En obra") + "</span></div>" +
+        "</div>" +
         '<div class="card-body"><div><span class="brand-tag">CATERPILLAR</span></div>' +
         "<h3>CAT " + m.model + '</h3><div class="meta">' + m.type + "</div>" +
         '<dl class="specs"><div><dt>Peso operativo</dt><dd>' + m.weight + "</dd></div><div><dt>Potencia</dt><dd>" + m.power + "</dd></div>" +
