@@ -43,28 +43,8 @@
 <body>
   <a class="skip-link" href="#contenido">Saltar al contenido</a>
 
-  <!-- HEADER -->
-  <header class="site-header">
-    <div class="container header-inner">
-      <a href="/" class="logo" aria-label="Indecorp, inicio">
-        <span class="logo-mark" aria-hidden="true">I</span>
-        <span class="logo-text">INDECORP</span>
-      </a>
-      <nav class="nav" id="nav" aria-label="Principal">
-        <a href="#flota">Flota</a>
-        <a href="#servicios">Servicios</a>
-        <a href="nosotros.html">Nosotros</a>
-        <a href="catalogo.html">Catálogo</a>
-      </nav>
-      <div class="header-actions">
-        <a class="btn btn--accent btn--sm" href="#contacto" data-wa>
-          <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg>
-          <span>Cotizar</span>
-        </a>
-        <button class="menu-toggle" aria-label="Abrir menú" aria-controls="nav" aria-expanded="false"><span></span><span></span></button>
-      </div>
-    </div>
-  </header>
+  <!-- NAVBAR compartido (src/shared/navbar.html, lo inserta vite.config.js) -->
+  <!-- navbar -->
 
   <!-- Cubre la página durante los saltos a secciones del menú -->
   <div class="page-veil" aria-hidden="true"></div>
@@ -118,7 +98,7 @@
         <div class="fleet-head">
           <div>
             <p class="eyebrow">La flota</p>
-            <h2 id="fleet-title">Cuatro líneas para mover tu obra</h2>
+            <h2 id="fleet-title">Tres líneas para mover tu obra</h2>
           </div>
           <a class="link-arrow" href="catalogo.html">Catálogo completo <span aria-hidden="true">→</span></a>
         </div>
@@ -128,7 +108,6 @@
             <li><button type="button" data-goto="0"><span>01</span>Excavadoras</button></li>
             <li><button type="button" data-goto="1"><span>02</span>Tractores</button></li>
             <li><button type="button" data-goto="2"><span>03</span>Compactadoras</button></li>
-            <li><button type="button" data-goto="3"><span>04</span>Motoniveladoras</button></li>
           </ol>
 
           <div class="fleet-track">
@@ -141,7 +120,7 @@
                 </picture>
               </div>
               <div class="fleet-copy">
-                <span class="fleet-num">01 / 04</span>
+                <span class="fleet-num">01 / 03</span>
                 <h3>Excavadoras</h3>
                 <p class="fleet-spec">De 5 a 37 t · cucharón hasta 1.9 m³ · profundidad hasta 7.4 m</p>
                 <a class="link-arrow" href="#contacto" data-wa="Hola, quiero cotizar una excavadora.">Cotizar excavadora <span aria-hidden="true">→</span></a>
@@ -157,7 +136,7 @@
                 </picture>
               </div>
               <div class="fleet-copy">
-                <span class="fleet-num">02 / 04</span>
+                <span class="fleet-num">02 / 03</span>
                 <h3>Tractores</h3>
                 <p class="fleet-spec">De 13 a 39 t · hoja hasta 8.7 m³ · empuje y nivelación</p>
                 <a class="link-arrow" href="#contacto" data-wa="Hola, quiero cotizar un tractor de oruga.">Cotizar tractor <span aria-hidden="true">→</span></a>
@@ -173,26 +152,10 @@
                 </picture>
               </div>
               <div class="fleet-copy">
-                <span class="fleet-num">03 / 04</span>
+                <span class="fleet-num">03 / 03</span>
                 <h3>Compactadoras</h3>
                 <p class="fleet-spec">De 10 a 11 t · tambor liso o pata de cabra · suelos y asfalto</p>
                 <a class="link-arrow" href="#contacto" data-wa="Hola, quiero cotizar una compactadora.">Cotizar compactadora <span aria-hidden="true">→</span></a>
-              </div>
-            </article>
-
-            <article class="fleet-slide">
-              <div class="fleet-media">
-                <span class="fleet-word" aria-hidden="true">Motoniveladoras</span>
-                <picture>
-                  <source type="image/avif" srcset="/assets/img/fleet/fleet-motoniveladoras-700.avif 700w, /assets/img/fleet/fleet-motoniveladoras-1400.avif 1400w" sizes="(max-width: 767px) 84vw, 50vw">
-                  <img src="/assets/img/fleet/fleet-motoniveladoras-700.webp" srcset="/assets/img/fleet/fleet-motoniveladoras-700.webp 700w, /assets/img/fleet/fleet-motoniveladoras-1400.webp 1400w" sizes="(max-width: 767px) 84vw, 50vw" width="1400" height="900" alt="Motoniveladora" loading="lazy" decoding="async">
-                </picture>
-              </div>
-              <div class="fleet-copy">
-                <span class="fleet-num">04 / 04</span>
-                <h3>Motoniveladoras</h3>
-                <p class="fleet-spec">De 16 a 20 t · hoja de 3.7 m · perfilado de vías y plataformas</p>
-                <a class="link-arrow" href="#contacto" data-wa="Hola, quiero cotizar una motoniveladora.">Cotizar motoniveladora <span aria-hidden="true">→</span></a>
               </div>
             </article>
           </div>

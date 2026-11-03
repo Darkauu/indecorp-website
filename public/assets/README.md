@@ -30,17 +30,15 @@ Para reemplazarlas, exporta el material final con **el mismo nombre y tamaño**,
 | 11 | `img/fleet/fleet-tractores-700` | 700 × 450 | **Sí** | Flota (móvil) | La misma imagen que #10, reducida. |
 | 12 | `img/fleet/fleet-compactadoras-1400` | 1400 × 900 | **Sí** | Flota, categoría 03 | Compactadora de rodillo recortada. |
 | 13 | `img/fleet/fleet-compactadoras-700` | 700 × 450 | **Sí** | Flota (móvil) | La misma imagen que #12, reducida. |
-| 14 | `img/fleet/fleet-motoniveladoras-1400` | 1400 × 900 | **Sí** | Flota, categoría 04 | Motoniveladora recortada. |
-| 15 | `img/fleet/fleet-motoniveladoras-700` | 700 × 450 | **Sí** | Flota (móvil) | La misma imagen que #14, reducida. |
-| 16 | `img/services/servicio-alquiler-1200` | 1200 × 900 | No | Tarjeta "Alquiler con o sin operador" | Foto en obra: equipo trabajando, idealmente con operador visible. |
-| 17 | `img/services/servicio-alquiler-600` | 600 × 450 | No | Misma tarjeta (móvil) | La misma imagen que #16, reducida. |
-| 18 | `img/services/servicio-traslado-1200` | 1200 × 900 | No | Tarjeta "Traslado de maquinaria" | Cabezal con cama baja transportando una máquina. |
-| 19 | `img/services/servicio-traslado-600` | 600 × 450 | No | Misma tarjeta (móvil) | La misma imagen que #18, reducida. |
-| 20 | `img/cta/cta-bg-2560` | 2560 × 1440 | No | CTA final a pantalla completa | Foto de obra con ambiente (atardecer o amanecer). Lleva un oscurecido encima para que el texto blanco se lea. |
-| 21 | `img/cta/cta-bg-1280` | 1280 × 720 | No | CTA final | La misma imagen que #20, reducida. |
-| 22 | `img/cta/cta-bg-mobile-828` | 828 × 1472 | No | CTA final (móvil, vertical) | La misma escena en vertical. |
+| 14 | `img/services/servicio-alquiler-1200` | 1200 × 900 | No | Tarjeta "Alquiler con o sin operador" | Foto en obra: equipo trabajando, idealmente con operador visible. Se muestra **sin los 120px superiores** (recorte anclado abajo): no pongas nada importante arriba. |
+| 15 | `img/services/servicio-alquiler-600` | 600 × 450 | No | Misma tarjeta (móvil) | La misma imagen que #14, reducida. |
+| 16 | `img/services/servicio-traslado-1200` | 1200 × 900 | No | Tarjeta "Traslado de maquinaria" | Cabezal con cama baja transportando una máquina. Mismo recorte superior de 120px. |
+| 17 | `img/services/servicio-traslado-600` | 600 × 450 | No | Misma tarjeta (móvil) | La misma imagen que #16, reducida. |
+| 18 | `img/cta/cta-bg-2560` | 2560 × 1440 | No | CTA final a pantalla completa | Foto de obra con ambiente (atardecer o amanecer). Lleva un oscurecido encima para que el texto blanco se lea. |
+| 19 | `img/cta/cta-bg-1280` | 1280 × 720 | No | CTA final | La misma imagen que #18, reducida. |
+| 20 | `img/cta/cta-bg-mobile-828` | 828 × 1472 | No | CTA final (móvil, vertical) | La misma escena en vertical. |
 
-Total: 22 imágenes × 2 formatos = **44 archivos**.
+Total: 20 imágenes × 2 formatos = **40 archivos**.
 
 ## Otros assets pendientes
 
@@ -53,4 +51,5 @@ Total: 22 imágenes × 2 formatos = **44 archivos**.
 
 - **Marca [NOMBRE]:** texto "INDECORP" en `index.html` y `CONFIG.brand` en `src/config.js`.
 - **WhatsApp [NÚMERO]:** `CONFIG.whatsapp` y `CONFIG.whatsappDisplay` en `src/config.js`. Todos los botones de WhatsApp se generan desde ahí.
+- **Teléfono del navbar [NÚMERO]:** `src/shared/navbar.html` (compartido por todas las páginas).
 - **Paleta [COLORES]:** variables en `:root` de `src/home/home.css`. Si cambia `--sand`, hay que reexportar la capa de polvo (#6 y #7) con ese mismo color base.

@@ -16,6 +16,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 import { CONFIG, waLink } from '../config.js';
 import { initPageTransitions } from '../page-transitions.js';
+import { setupNavbar } from '../shared/navbar.js';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -35,25 +36,6 @@ function setupWhatsApp(root) {
   root.querySelectorAll('[data-wa-display]').forEach((el) => {
     el.textContent = CONFIG.whatsappDisplay;
   });
-}
-
-function setupMenu(header) {
-  const toggle = header.querySelector('.menu-toggle');
-  const nav = header.querySelector('.nav');
-  const setOpen = (open) => {
-    header.classList.toggle('nav-open', open);
-    toggle.setAttribute('aria-expanded', String(open));
-    toggle.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
-  };
-  const onToggle = () => setOpen(!header.classList.contains('nav-open'));
-  const onNav = (e) => { if (e.target.closest('a')) setOpen(false); };
-  toggle.addEventListener('click', onToggle);
-  nav.addEventListener('click', onNav);
-  return () => {
-    toggle.removeEventListener('click', onToggle);
-    nav.removeEventListener('click', onNav);
-    setOpen(false);
-  };
 }
 
 /* ---------- Scroll suave ---------- */
@@ -271,13 +253,12 @@ function ctaParallax(section, k) {
 /* ---------- Montaje / desmontaje ---------- */
 
 export function initHome(root = document) {
-  const header = root.querySelector('.site-header');
   const hero = root.querySelector('.hero');
   const fleet = root.querySelector('.fleet');
   const cta = root.querySelector('.cta');
 
   setupWhatsApp(root);
-  const cleanupMenu = setupMenu(header);
+  const cleanupNavbar = setupNavbar(root.querySelector('[data-navbar]'));
   const cleanupPageTransitions = initPageTransitions();   // fundido al ir a otras páginas
 
   // gsap.matchMedia revierte automáticamente todas las animaciones y
@@ -286,13 +267,6 @@ export function initHome(root = document) {
   mm.add(QUERIES, (ctx) => {
     const { isDesktop, motion } = ctx.conditions;
     const cleanups = [];
-
-    ScrollTrigger.create({
-      start: 40,
-      end: 'max',
-      onToggle: (self) => header.classList.toggle('is-scrolled', self.isActive),
-    });
-    cleanups.push(() => header.classList.remove('is-scrolled'));
 
     if (motion) {
       const k = isDesktop ? 1 : 0.5;          // parallax a la mitad en móvil
@@ -317,7 +291,7 @@ export function initHome(root = document) {
   return function destroyHome() {
     mm.revert();
     ScrollTrigger.getAll().forEach((t) => t.kill());
-    cleanupMenu();
+    cleanupNavbar();
     cleanupPageTransitions();
   };
 }
