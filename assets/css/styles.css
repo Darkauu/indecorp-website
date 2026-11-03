@@ -6,6 +6,7 @@
 
 @import '../../src/page-transitions.css';
 @import '../../src/shared/navbar.css';
+@import 'lenis/dist/lenis.css';
 
 :root {
   --accent: #f2a900;          /* acento (placeholder, editable) */
@@ -30,7 +31,7 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html:not(.lenis) { scroll-behavior: smooth; }   /* con Lenis activo, el scroll suave lo hace Lenis */
 body {
   margin: 0;
   font-family: var(--font-body);
