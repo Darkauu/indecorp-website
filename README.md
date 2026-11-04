@@ -38,6 +38,11 @@ npm run preview   # sirve dist/ en http://localhost:4173
 
 Todas las páginas usan Lenis desde `src/shared/smooth-scroll.js`. En el home va sincronizado con GSAP ScrollTrigger; en las páginas internas usa su propio `requestAnimationFrame`. Con `prefers-reduced-motion` no se activa. En las páginas internas se pausa mientras está abierto el formulario de cotización.
 
+## Formulario de cotización (páginas internas)
+
+- **Equipo de interés:** buscador dinámico (`assets/js/machine-search.js`) sobre los equipos de `assets/js/data.js`. Si se abre desde una tarjeta del catálogo, el equipo llega preseleccionado; desde cualquier otro CTA, llega vacío. Acepta texto libre si el equipo no está en el catálogo.
+- **Envío:** abre WhatsApp (`wa.me`) con la solicitud ya escrita, al número de `CONFIG.whatsapp` en `src/config.js`. Ese mismo número lo usan todos los botones de WhatsApp del sitio.
+
 ## Navbar compartido
 
 Todas las páginas usan el mismo navbar: `src/shared/navbar.html` (marcado), `navbar.css` y `navbar.js`.

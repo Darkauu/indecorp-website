@@ -9,6 +9,8 @@
 import { initPageTransitions } from '../../src/page-transitions.js';
 import { setupNavbar } from '../../src/shared/navbar.js';
 import { createSmoothScroll, prefersReducedMotion } from '../../src/shared/smooth-scroll.js';
+import { CONFIG, waLink } from '../../src/config.js';
+import { createMachineSearch } from './machine-search.js';
 
 initPageTransitions();   // fundido al cambiar de página (compartido con el home)
 
@@ -16,7 +18,8 @@ initPageTransitions();   // fundido al cambiar de página (compartido con el hom
   "use strict";
 
   var DATA = window.INDECORP_DATA || { categories: [], machines: [] };
-  var CONTACT = { phone: "+507 0000-0000", whatsapp: "+507 6000-0000", email: "ventas@indecorp.com" };
+  // El número de WhatsApp se configura en src/config.js (compartido con el home).
+  var CONTACT = { phone: "+507 0000-0000", whatsapp: CONFIG.whatsappDisplay, email: "ventas@indecorp.com" };
 
   /* ---------- Íconos (trazos simples, 24x24) ---------- */
   var ICONS = {
@@ -112,7 +115,7 @@ initPageTransitions();   // fundido al cambiar de página (compartido con el hom
     "</ul></div></div>" +
     '<div class="footer-bottom"><span>© ' + new Date().getFullYear() + " INDECORP — Todos los derechos reservados.</span><span>Mockup v1 · contenido de ejemplo</span></div>" +
     "</div></footer>" +
-    '<a class="float-wa" href="#" aria-label="WhatsApp">' + icon("whatsapp", 28) + "</a>";
+    '<a class="float-wa" href="#" data-wa aria-label="WhatsApp">' + icon("whatsapp", 28) + "</a>";
 
   var modalHtml =
     '<div class="modal" id="quote-modal" role="dialog" aria-modal="true" aria-labelledby="quote-title" data-lenis-prevent>' +
@@ -120,20 +123,23 @@ initPageTransitions();   // fundido al cambiar de página (compartido con el hom
     '<button class="modal-close" aria-label="Cerrar">&times;</button>' +
     '<form id="quote-form">' +
     '<span class="eyebrow">Cotización</span><h3 id="quote-title" style="font-size:2rem">Solicite su equipo</h3>' +
-    '<p style="font-size:.9rem">Complete el formulario y un asesor le contactará. <em>(Formulario demostrativo, no envía datos.)</em></p>' +
+    '<p style="font-size:.9rem">Complete el formulario y lo enviaremos por WhatsApp a un asesor.</p>' +
     '<div class="form-row"><div class="field"><label for="q-name">Nombre</label><input id="q-name" required></div>' +
     '<div class="field"><label for="q-company">Empresa</label><input id="q-company"></div></div>' +
     '<div class="form-row"><div class="field"><label for="q-phone">Teléfono</label><input id="q-phone" type="tel" required></div>' +
     '<div class="field"><label for="q-email">Correo</label><input id="q-email" type="email"></div></div>' +
-    '<div class="field"><label for="q-machine">Equipo de interés</label><select id="q-machine"><option value="">Seleccione…</option>' +
-    DATA.machines.map(function (m) { return "<option>CAT " + m.model + " · " + m.type + "</option>"; }).join("") +
-    "</select></div>" +
+    // Equipo de interés: buscador dinámico (assets/js/machine-search.js) en lugar de una lista desplegable.
+    '<div class="field machine-search"><label for="q-machine">Equipo de interés</label>' +
+    '<div class="machine-search__box">' + icon("search", 16) +
+    '<input id="q-machine" type="text" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="q-machine-list" autocomplete="off" placeholder="Busca modelo o tipo (ej. 320)">' +
+    '<button type="button" class="machine-search__clear" aria-label="Quitar equipo" hidden>&times;</button></div>' +
+    '<ul id="q-machine-list" class="machine-search__list" role="listbox" aria-label="Equipos del catálogo" hidden></ul></div>' +
     '<div class="form-row"><div class="field"><label for="q-period">Modalidad</label><select id="q-period"><option>Por día</option><option>Por semana</option><option>Por mes</option><option>Por proyecto</option></select></div>' +
     '<div class="field"><label for="q-operator">Operador</label><select id="q-operator"><option>Con operador</option><option>Sin operador</option></select></div></div>' +
     '<div class="field"><label for="q-msg">Detalles del proyecto</label><textarea id="q-msg" rows="3"></textarea></div>' +
-    '<button class="btn btn--accent btn--block" type="submit">Enviar solicitud <span class="arrow">' + icon("arrow", 16) + "</span></button>" +
+    '<button class="btn btn--accent btn--block" type="submit">' + icon("whatsapp", 18) + ' Enviar por WhatsApp <span class="arrow">' + icon("arrow", 16) + "</span></button>" +
     "</form>" +
-    '<div class="form-success"><div class="icon-box" style="margin:0 auto 16px">' + icon("check", 22) + '</div><h3>¡Solicitud recibida!</h3><p>Un asesor le contactará en breve.</p><button class="btn btn--outline" data-close>Cerrar</button></div>' +
+    '<div class="form-success"><div class="icon-box" style="margin:0 auto 16px">' + icon("check", 22) + '</div><h3>¡Listo! Abrimos WhatsApp</h3><p>Tu solicitud ya está escrita en el chat: solo tienes que enviarla.<br>¿No se abrió? <a class="form-success__link" target="_blank" rel="noopener">Abrir WhatsApp</a></p><button class="btn btn--outline" data-close>Cerrar</button></div>' +
     "</div></div>";
 
   document.body.insertAdjacentHTML("beforeend", footerHtml + modalHtml);
@@ -146,6 +152,14 @@ initPageTransitions();   // fundido al cambiar de página (compartido con el hom
     el.insertAdjacentHTML("afterbegin", machineSvg(el.getAttribute("data-shape")));
   });
 
+  /* ---------- Enlaces de WhatsApp → número configurado (src/config.js) ---------- */
+  // El botón "Cotizar" del navbar también lleva data-wa (para el home); aquí abre el formulario.
+  document.querySelectorAll("[data-wa]:not([data-quote])").forEach(function (a) {
+    a.href = waLink(a.getAttribute("data-wa") || undefined);
+    a.target = "_blank";
+    a.rel = "noopener";
+  });
+
   /* ---------- Navbar compartido (src/shared/navbar.*) ---------- */
   setupNavbar();
 
@@ -156,13 +170,21 @@ initPageTransitions();   // fundido al cambiar de página (compartido con el hom
   var modal = document.getElementById("quote-modal");
   var form = document.getElementById("quote-form");
   var success = modal.querySelector(".form-success");
+  var catById = {};
+  DATA.categories.forEach(function (c) { catById[c.id] = c.name; });
+  var machineSearch = createMachineSearch({
+    input: document.getElementById("q-machine"),
+    list: document.getElementById("q-machine-list"),
+    clearButton: modal.querySelector(".machine-search__clear"),
+    machines: DATA.machines,
+    categoryName: function (id) { return catById[id] || ""; },
+  });
+
+  // machine: modelo del catálogo (ej. "320") si viene de una tarjeta; vacío si viene de otro CTA.
   function openQuote(machine) {
     form.style.display = "";
     success.classList.remove("is-visible");
-    if (machine) {
-      var sel = document.getElementById("q-machine");
-      Array.prototype.forEach.call(sel.options, function (o) { if (o.text.indexOf("CAT " + machine + " ") === 0) sel.value = o.value; });
-    }
+    machineSearch.reset(machine || null);
     modal.classList.add("is-open");
     document.body.style.overflow = "hidden";
     if (smooth) smooth.lenis.stop();   // la página no se desplaza detrás del formulario
@@ -178,11 +200,30 @@ initPageTransitions();   // fundido al cambiar de página (compartido con el hom
     if (e.target === modal || e.target.closest(".modal-close") || e.target.closest("[data-close]")) closeQuote();
   });
   document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeQuote(); });
+  // Envío: arma el mensaje y abre WhatsApp (wa.me) con el número de src/config.js.
+  function field(id) { return document.getElementById(id).value.trim(); }
+  function optional(label, id) { return field(id) ? "*" + label + ":* " + field(id) : null; }   // se omite si está vacío
   form.addEventListener("submit", function (e) {
     e.preventDefault();
+    var lines = [
+      "Hola, quiero solicitar una cotización:",
+      "",
+      "*Nombre:* " + field("q-name"),
+      optional("Empresa", "q-company"),
+      "*Teléfono:* " + field("q-phone"),
+      optional("Correo", "q-email"),
+      "*Equipo de interés:* " + (machineSearch.getValue() || "Por definir"),
+      "*Modalidad:* " + field("q-period"),
+      "*Operador:* " + field("q-operator"),
+      optional("Detalles", "q-msg"),
+    ].filter(function (line) { return line !== null; });
+    var url = waLink(lines.join("\n"));
+    window.open(url, "_blank", "noopener");             // en el mismo clic: los navegadores no lo bloquean
+    success.querySelector(".form-success__link").href = url; // por si aun así no se abrió
     form.style.display = "none";
     success.classList.add("is-visible");
     form.reset();
+    machineSearch.reset(null);
   });
 
   /* ---------- Home: líneas de equipos generadas desde los datos ---------- */
