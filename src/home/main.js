@@ -9,7 +9,6 @@
    el parallax se reduce a la mitad y no hay pins.
    ========================================================= */
 
-import Lenis from 'lenis';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 // Los estilos se cargan con <link> en index.html (no desde JS) para que no haya parpadeo sin estilos.
@@ -17,6 +16,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { CONFIG, waLink } from '../config.js';
 import { initPageTransitions } from '../page-transitions.js';
 import { setupNavbar } from '../shared/navbar.js';
+import { createSmoothScroll } from '../shared/smooth-scroll.js';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -36,24 +36,6 @@ function setupWhatsApp(root) {
   root.querySelectorAll('[data-wa-display]').forEach((el) => {
     el.textContent = CONFIG.whatsappDisplay;
   });
-}
-
-/* ---------- Scroll suave ---------- */
-
-function createSmoothScroll() {
-  const lenis = new Lenis({ autoRaf: false }); // las anclas internas las maneja sectionTransitions()
-  const tick = (time) => lenis.raf(time * 1000);
-  lenis.on('scroll', ScrollTrigger.update);
-  gsap.ticker.add(tick);
-  gsap.ticker.lagSmoothing(0);
-  return {
-    lenis,
-    destroy() {
-      gsap.ticker.remove(tick);
-      gsap.ticker.lagSmoothing(500, 33);
-      lenis.destroy();
-    },
-  };
 }
 
 /* ---------- Navegación a secciones: fundido en vez de un scroll largo ---------- */
@@ -270,7 +252,7 @@ export function initHome(root = document) {
 
     if (motion) {
       const k = isDesktop ? 1 : 0.5;          // parallax a la mitad en móvil
-      const smooth = createSmoothScroll();
+      const smooth = createSmoothScroll({ gsap, ScrollTrigger });   // src/shared/smooth-scroll.js
       cleanups.push(() => smooth.destroy());
       cleanups.push(sectionTransitions(root, smooth));
 

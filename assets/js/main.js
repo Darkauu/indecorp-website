@@ -8,6 +8,7 @@
 
 import { initPageTransitions } from '../../src/page-transitions.js';
 import { setupNavbar } from '../../src/shared/navbar.js';
+import { createSmoothScroll, prefersReducedMotion } from '../../src/shared/smooth-scroll.js';
 
 initPageTransitions();   // fundido al cambiar de página (compartido con el home)
 
@@ -114,7 +115,7 @@ initPageTransitions();   // fundido al cambiar de página (compartido con el hom
     '<a class="float-wa" href="#" aria-label="WhatsApp">' + icon("whatsapp", 28) + "</a>";
 
   var modalHtml =
-    '<div class="modal" id="quote-modal" role="dialog" aria-modal="true" aria-labelledby="quote-title">' +
+    '<div class="modal" id="quote-modal" role="dialog" aria-modal="true" aria-labelledby="quote-title" data-lenis-prevent>' +
     '<div class="modal-dialog">' +
     '<button class="modal-close" aria-label="Cerrar">&times;</button>' +
     '<form id="quote-form">' +
@@ -148,6 +149,9 @@ initPageTransitions();   // fundido al cambiar de página (compartido con el hom
   /* ---------- Navbar compartido (src/shared/navbar.*) ---------- */
   setupNavbar();
 
+  /* ---------- Scroll suave, igual que en el home (src/shared/smooth-scroll.js) ---------- */
+  var smooth = prefersReducedMotion() ? null : createSmoothScroll();
+
   /* ---------- Modal de cotización ---------- */
   var modal = document.getElementById("quote-modal");
   var form = document.getElementById("quote-form");
@@ -161,8 +165,13 @@ initPageTransitions();   // fundido al cambiar de página (compartido con el hom
     }
     modal.classList.add("is-open");
     document.body.style.overflow = "hidden";
+    if (smooth) smooth.lenis.stop();   // la página no se desplaza detrás del formulario
   }
-  function closeQuote() { modal.classList.remove("is-open"); document.body.style.overflow = ""; }
+  function closeQuote() {
+    modal.classList.remove("is-open");
+    document.body.style.overflow = "";
+    if (smooth) smooth.lenis.start();
+  }
   document.addEventListener("click", function (e) {
     var trigger = e.target.closest("[data-quote]");
     if (trigger) { e.preventDefault(); openQuote(trigger.getAttribute("data-quote")); }

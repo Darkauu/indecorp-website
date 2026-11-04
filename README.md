@@ -34,6 +34,10 @@ npm run preview   # sirve dist/ en http://localhost:4173
 - Las imágenes van en AVIF + WebP con `width`/`height`. Las capas del hero se precargan; el resto usa `loading="lazy"`.
 - Todas las animaciones viven en un `gsap.matchMedia()`. `initHome()` devuelve `destroyHome()`, que revierte las animaciones, mata los ScrollTriggers, destruye Lenis y quita los listeners. Se llama en `pagehide` y en HMR; si el home se monta en un router, llamarla al cambiar de ruta.
 
+## Scroll suave en todas las páginas
+
+Todas las páginas usan Lenis desde `src/shared/smooth-scroll.js`. En el home va sincronizado con GSAP ScrollTrigger; en las páginas internas usa su propio `requestAnimationFrame`. Con `prefers-reduced-motion` no se activa. En las páginas internas se pausa mientras está abierto el formulario de cotización.
+
 ## Navbar compartido
 
 Todas las páginas usan el mismo navbar: `src/shared/navbar.html` (marcado), `navbar.css` y `navbar.js`.
@@ -45,6 +49,7 @@ Vite lo inserta al compilar donde cada página tenga `<!-- navbar -->` y marca e
 index.html               home
 src/config.js            marca y WhatsApp provisionales ([NOMBRE], [NÚMERO])
 src/shared/navbar.*      navbar compartido por todas las páginas
+src/shared/smooth-scroll.js  scroll suave (Lenis) compartido
 src/home/main.js         animaciones (Lenis + GSAP ScrollTrigger)
 src/home/home.css        estilos del home (paleta en :root)
 public/assets/img/       placeholders con dimensiones finales
