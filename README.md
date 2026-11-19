@@ -34,6 +34,18 @@ npm run preview   # sirve dist/ en http://localhost:4173
 - Las imágenes van en AVIF + WebP con `width`/`height`. Las capas del hero se precargan; el resto usa `loading="lazy"`.
 - Todas las animaciones viven en un `gsap.matchMedia()`. `initHome()` devuelve `destroyHome()`, que revierte las animaciones, mata los ScrollTriggers, destruye Lenis y quita los listeners. Se llama en `pagehide` y en HMR; si el home se monta en un router, llamarla al cambiar de ruta.
 
+## Tema claro / oscuro
+
+- El botón con luna o sol del navbar cambia de tema en todas las páginas.
+- Por defecto se usa el del sistema operativo (`prefers-color-scheme`) y sigue sus cambios. Al pulsar el botón, la elección se guarda en el navegador (`localStorage`) y pasa a mandar.
+- `src/shared/theme-init.js` fija el tema antes del primer pintado, sin parpadeo; `vite.config.js` lo inserta en el `<head>` de cada página. La lógica del botón está en `src/shared/theme.js`.
+- Los colores de cada tema son variables en `:root` y `:root[data-theme="dark"]` de `src/home/home.css`, `assets/css/styles.css` y `src/shared/navbar.css`. Las secciones que siempre son oscuras (hero de las páginas internas, cifras, CTA, footer) no cambian.
+
+## Tipografía
+
+- **Títulos y énfasis:** Montserrat. **Texto:** Inter.
+- Las dos se sirven desde el propio sitio con `@fontsource` y se importan en el CSS; ninguna página depende de Google Fonts.
+
 ## Scroll suave en todas las páginas
 
 Todas las páginas usan Lenis desde `src/shared/smooth-scroll.js`. En el home va sincronizado con GSAP ScrollTrigger; en las páginas internas usa su propio `requestAnimationFrame`. Con `prefers-reduced-motion` no se activa. En las páginas internas se pausa mientras está abierto el formulario de cotización.
@@ -68,5 +80,5 @@ nosotros.html, catalogo.html, servicios.html, assets/   mockup v1
 | --- | --- |
 | `gsap` (incluye ScrollTrigger) | Parallax, pin, reveals y contadores |
 | `lenis` | Scroll suave |
-| `@fontsource/barlow-condensed`, `@fontsource/inter` | Fuentes alojadas localmente: sans condensada pesada para titulares y sans neutra para texto |
+| `@fontsource/montserrat`, `@fontsource/inter` | Fuentes alojadas localmente: Montserrat para títulos y énfasis, Inter para texto |
 | `vite` (dev) | Servidor local y build |
