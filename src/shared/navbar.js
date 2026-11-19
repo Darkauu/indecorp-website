@@ -1,4 +1,6 @@
-/* Comportamiento del navbar compartido: estado al hacer scroll y menú móvil. */
+/* Comportamiento del navbar compartido: estado al hacer scroll, menú móvil y botón de tema. */
+
+import { setupThemeToggle } from './theme.js';
 
 export function setupNavbar(navbar = document.querySelector('[data-navbar]')) {
   if (!navbar) return () => {};
@@ -15,6 +17,7 @@ export function setupNavbar(navbar = document.querySelector('[data-navbar]')) {
   const onLink = (e) => { if (e.target.closest('a')) setOpen(false); };
   const onKey = (e) => { if (e.key === 'Escape') setOpen(false); };
 
+  const cleanupTheme = setupThemeToggle(navbar.querySelector('[data-theme-toggle]'));
   window.addEventListener('scroll', onScroll, { passive: true });
   toggle.addEventListener('click', onToggle);
   links.addEventListener('click', onLink);
@@ -22,6 +25,7 @@ export function setupNavbar(navbar = document.querySelector('[data-navbar]')) {
   onScroll();
 
   return () => {
+    cleanupTheme();
     window.removeEventListener('scroll', onScroll);
     toggle.removeEventListener('click', onToggle);
     links.removeEventListener('click', onLink);
