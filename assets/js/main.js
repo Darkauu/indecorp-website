@@ -122,7 +122,7 @@ initPageTransitions();   // fundido al cambiar de página (compartido con el hom
     '<div class="modal-dialog">' +
     '<button class="modal-close" aria-label="Cerrar">&times;</button>' +
     '<form id="quote-form">' +
-    '<span class="eyebrow">Cotización</span><h3 id="quote-title" style="font-size:2rem">Solicite su equipo</h3>' +
+    '<span class="eyebrow">Cotización</span><h3 id="quote-title" style="font-size:1.5rem">Solicite su equipo</h3>' +
     '<p style="font-size:.9rem">Complete el formulario y lo enviaremos por WhatsApp a un asesor.</p>' +
     '<div class="form-row"><div class="field"><label for="q-name">Nombre</label><input id="q-name" required></div>' +
     '<div class="field"><label for="q-company">Empresa</label><input id="q-company"></div></div>' +

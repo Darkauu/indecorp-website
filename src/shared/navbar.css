@@ -1,26 +1,51 @@
 /* =========================================================
    Navbar compartido por todas las páginas (src/shared/navbar.html).
    Autocontenido: no depende de las variables de cada página.
+   Sigue el tema de html[data-theme] (claro / oscuro).
    Solo se animan transform y opacity.
    ========================================================= */
 
-:root { --navbar-h: 72px; }
+:root {
+  --navbar-h: 72px;
+
+  /* Tema claro */
+  --nav-bg: rgba(246, 244, 241, .68);
+  --nav-scrolled: rgba(246, 244, 241, .45);   /* capa extra al hacer scroll */
+  --nav-shadow: 0 6px 20px rgba(0, 0, 0, .08);
+  --nav-border: rgba(0, 0, 0, .08);
+  --nav-fg: #1b1d20;
+  --nav-link: #33373c;
+  --nav-muted: #5f656d;
+  --nav-drawer: #f6f4f1;
+  --nav-drawer-line: #d9d4cc;
+}
+:root[data-theme="dark"] {
+  --nav-bg: rgba(27, 29, 32, .6);
+  --nav-scrolled: rgba(27, 29, 32, .4);
+  --nav-shadow: 0 6px 20px rgba(0, 0, 0, .25);
+  --nav-border: rgba(255, 255, 255, .08);
+  --nav-fg: #ffffff;
+  --nav-link: #e3e6e9;
+  --nav-muted: #b4b9bf;
+  --nav-drawer: #1b1d20;
+  --nav-drawer-line: #33373c;
+}
 
 .navbar {
   position: fixed; inset: 0 0 auto; z-index: 50;
   height: var(--navbar-h);
   /* Translúcido: deja ver la página detrás, desenfocada. */
-  background: rgba(27, 29, 32, .6);
+  background: var(--nav-bg);
   backdrop-filter: blur(14px) saturate(140%);   /* el build añade -webkit- para Safari */
-  border-bottom: 1px solid rgba(255, 255, 255, .08);
+  border-bottom: 1px solid var(--nav-border);
   font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   line-height: 1.6;
 }
-/* Al hacer scroll: algo más oscuro (sigue translúcido) y con sombra; solo cambia la opacidad de esta capa. */
+/* Al hacer scroll: algo más opaco (sigue translúcido) y con sombra; solo cambia la opacidad de esta capa. */
 .navbar::before {
   content: ""; position: absolute; inset: 0; pointer-events: none;
-  background: rgba(27, 29, 32, .4);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, .25);
+  background: var(--nav-scrolled);
+  box-shadow: var(--nav-shadow);
   opacity: 0; transition: opacity .3s cubic-bezier(.2, .7, .2, 1);
 }
 .navbar.is-scrolled::before { opacity: 1; }
@@ -32,32 +57,32 @@
 }
 .navbar a { text-decoration: none; }
 
-.navbar__logo { display: flex; align-items: center; gap: 9px; font: 800 1.45rem/1.5 "Barlow Condensed", "Arial Narrow", Arial, sans-serif; color: #fff; letter-spacing: .04em; }
+.navbar__logo { display: flex; align-items: center; gap: 9px; font: 800 1.08rem/1.5 "Montserrat", "Segoe UI", Arial, sans-serif; color: var(--nav-fg); letter-spacing: .03em; }
 .navbar__mark {
   width: 30px; height: 30px; display: grid; place-items: center;
-  background: #f2a900; color: #1b1d20; font-size: 1.05rem;
+  background: #f2a900; color: #1b1d20; font-size: .95rem;
   clip-path: polygon(0 0, 100% 0, 100% 70%, 70% 100%, 0 100%);
 }
 .navbar__brand small {
   display: block; margin-top: -3px;
-  font: 600 .5rem/1.6 "Inter", system-ui, sans-serif; letter-spacing: .2em; color: #b4b9bf;
+  font: 600 .5rem/1.6 "Inter", system-ui, sans-serif; letter-spacing: .2em; color: var(--nav-muted);
 }
 
 .navbar__links { display: flex; gap: 30px; }
 .navbar__link {
   position: relative; padding: 6px 0;
   font-size: .76rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
-  color: #e3e6e9; transition: color .2s;   /* más claro que antes: el fondo ahora es translúcido */
+  color: var(--nav-link); transition: color .2s;
 }
 .navbar__link::after {
   content: ""; position: absolute; left: 0; right: 0; bottom: -2px; height: 2px; background: #f2a900;
   transform: scaleX(0); transform-origin: left; transition: transform .3s cubic-bezier(.2, .7, .2, 1);
 }
-.navbar__link:hover, .navbar__link[aria-current="page"] { color: #fff; }
+.navbar__link:hover, .navbar__link[aria-current="page"] { color: var(--nav-fg); }
 .navbar__link:hover::after, .navbar__link[aria-current="page"]::after { transform: scaleX(1); }
 
-.navbar__actions { display: flex; align-items: center; gap: 18px; }
-.navbar__phone { display: flex; align-items: center; gap: 8px; font-size: .8rem; font-weight: 600; color: #e3e6e9; }
+.navbar__actions { display: flex; align-items: center; gap: 16px; }
+.navbar__phone { display: flex; align-items: center; gap: 8px; font-size: .8rem; font-weight: 600; color: var(--nav-link); }
 .navbar__phone svg { color: #f2a900; }
 .navbar__cta {
   display: inline-flex; align-items: center; padding: 8px 16px;
@@ -68,8 +93,20 @@
 .navbar__cta:hover { opacity: .85; }
 .navbar :focus-visible { outline: 3px solid #f2a900; outline-offset: 3px; }
 
+/* Botón de tema: muestra la luna en el tema claro y el sol en el oscuro (lo que se activará). */
+.navbar__theme {
+  display: grid; place-items: center; width: 36px; height: 36px; padding: 0;
+  border: 1px solid var(--nav-border); border-radius: 50%; background: transparent;
+  color: var(--nav-fg); cursor: pointer; transition: opacity .2s;
+}
+.navbar__theme:hover { opacity: .75; }
+.navbar__theme svg { width: 18px; height: 18px; }
+.navbar__theme .icon-sun { display: none; }
+:root[data-theme="dark"] .navbar__theme .icon-sun { display: block; }
+:root[data-theme="dark"] .navbar__theme .icon-moon { display: none; }
+
 .navbar__toggle { display: none; position: relative; z-index: 60; padding: 8px; background: none; border: 0; cursor: pointer; }
-.navbar__toggle span { display: block; width: 24px; height: 2px; margin: 5px 0; background: #fff; transition: transform .3s, opacity .3s; }
+.navbar__toggle span { display: block; width: 24px; height: 2px; margin: 5px 0; background: var(--nav-fg); transition: transform .3s, opacity .3s; }
 .navbar.is-open .navbar__toggle span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
 .navbar.is-open .navbar__toggle span:nth-child(2) { opacity: 0; }
 .navbar.is-open .navbar__toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
@@ -78,16 +115,17 @@
   .navbar__phone { display: none; }
 }
 @media (max-width: 860px) {
+  .navbar__actions { gap: 10px; }
   .navbar__toggle { display: block; }
   .navbar__cta { display: none; }
   .navbar__links {
     position: fixed; top: 0; right: 0; height: 100vh; width: min(320px, 85vw);
     flex-direction: column; gap: 0; padding: calc(var(--navbar-h) + 16px) 32px 32px;
-    background: #1b1d20; box-shadow: -10px 0 30px rgba(0, 0, 0, .3);
+    background: var(--nav-drawer); box-shadow: -10px 0 30px rgba(0, 0, 0, .3);
     transform: translateX(100%); transition: transform .35s cubic-bezier(.2, .7, .2, 1);
   }
   .navbar.is-open .navbar__links { transform: none; }
-  .navbar__link { padding: 16px 0; border-bottom: 1px solid #33373c; font-size: .9rem; }
+  .navbar__link { padding: 16px 0; border-bottom: 1px solid var(--nav-drawer-line); font-size: .9rem; }
   .navbar__link::after { display: none; }
 }
 @media (max-width: 600px) {
