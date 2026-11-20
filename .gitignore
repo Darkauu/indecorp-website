@@ -1,3 +1,8 @@
 node_modules/
 dist/
 .DS_Store
+
+# Archivos locales del editor y de herramientas (no van al repo)
+.idea/
+.firebase/
+firebase-debug*.log
