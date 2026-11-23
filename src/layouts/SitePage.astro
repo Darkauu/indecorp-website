@@ -1,0 +1,33 @@
+---
+/* =========================================================
+   Layout de las páginas internas (Nosotros, Catálogo, Servicios):
+   estilos del sitio, footer, botón de WhatsApp, formulario de cotización
+   y los datos que necesita el buscador de equipos en el navegador.
+   ========================================================= */
+import BaseLayout from './BaseLayout.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import QuoteModal from '../components/QuoteModal.astro';
+import { getCatalog } from '../lib/catalog.js';
+import '../styles/site.css';
+
+interface Props {
+  title: string;
+  description: string;
+  active: 'nosotros' | 'catalogo' | 'servicios';
+}
+const { title, description, active } = Astro.props;
+
+// Datos mínimos para el buscador del formulario (src/scripts/machine-search.js).
+const { categories, machines } = await getCatalog();
+const clientData = JSON.stringify({
+  categories: categories.map(({ id, name }) => ({ id, name })),
+  machines: machines.map(({ model, type, category }) => ({ model, type, category })),
+}).replace(/</g, '\\u003c');
+---
+<BaseLayout title={title} description={description} active={active} pageId={active}>
+  <slot />
+  <SiteFooter />
+  <QuoteModal />
+  <script is:inline type="application/json" id="catalog-data" set:html={clientData} />
+  <script>import '../scripts/site.js';</script>
+</BaseLayout>

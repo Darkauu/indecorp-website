@@ -15,7 +15,7 @@ const normalize = (text) => text.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowe
 export function createMachineSearch({ input, list, clearButton, machines, categoryName }) {
   const items = machines.map((m) => {
     const label = `CAT ${m.model} · ${m.type}`;
-    return { machine: m, label, haystack: normalize(`cat ${m.model} ${m.type} ${categoryName(m.cat)}`) };
+    return { machine: m, label, haystack: normalize(`cat ${m.model} ${m.type} ${categoryName(m.category)}`) };
   });
   let selected = null;
   let results = [];

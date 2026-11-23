@@ -1,36 +1,18 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Indecorp · Alquiler de maquinaria pesada</title>
-  <meta name="description" content="Alquiler de maquinaria pesada con y sin operador, traslado a tu obra y soporte 24/7. Cotiza por WhatsApp.">
-  <meta name="theme-color" content="#e9e5df">
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-
+---
+/* Home: prototipo con scroll animado (ver src/home/main.js y src/home/home.css). */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import '../home/home.css';
+---
+<BaseLayout title="Indecorp · Alquiler de maquinaria pesada" description="Alquiler de maquinaria pesada con y sin operador, traslado a tu obra y soporte 24/7. Cotiza por WhatsApp." active="inicio" themeColor="#e9e5df">
+  <a slot="before-nav" class="skip-link" href="#contenido">Saltar al contenido</a>
+  <Fragment slot="head">
   <!-- Capas del hero: se precargan (resto de imágenes con loading="lazy") -->
   <link rel="preload" as="image" type="image/avif" media="(max-width: 767px)" href="/assets/img/hero/hero-bg-mobile-828.avif" fetchpriority="high">
   <link rel="preload" as="image" type="image/avif" media="(min-width: 768px)" imagesrcset="/assets/img/hero/hero-bg-1280.avif 1280w, /assets/img/hero/hero-bg-2560.avif 2560w" imagesizes="100vw" fetchpriority="high">
   <link rel="preload" as="image" type="image/avif" imagesrcset="/assets/img/hero/hero-machine-800.avif 800w, /assets/img/hero/hero-machine-1600.avif 1600w" imagesizes="(max-width: 767px) 120vw, 62vw">
   <link rel="preload" as="image" type="image/avif" imagesrcset="/assets/img/hero/hero-dust-1280.avif 1280w, /assets/img/hero/hero-dust-2560.avif 2560w" imagesizes="110vw">
 
-  <link rel="stylesheet" href="/src/home/home.css">
-  <script>
-    // Fundido de entrada al llegar desde otra página del sitio (ver src/page-transitions.js).
-    (function () { try {
-      if (sessionStorage.getItem('indecorp:veil')) {
-        sessionStorage.removeItem('indecorp:veil');
-        var root = document.documentElement;
-        root.classList.add('route-enter');
-        var reveal = function () {
-          requestAnimationFrame(function () { requestAnimationFrame(function () { root.classList.remove('route-enter'); }); });
-        };
-        document.addEventListener('DOMContentLoaded', reveal);
-        setTimeout(reveal, 3000);   // salvavidas
-      }
-    } catch (e) {} })();
-  </script>
-  <script>
+  <script is:inline>
     // Prepara la intro del hero antes del primer pintado (solo si se permite movimiento).
     // Salvavidas: si el JS no llega a cargar, el contenido se muestra igual a los 4 s.
     if (matchMedia('(prefers-reduced-motion: no-preference)').matches) {
@@ -38,13 +20,7 @@
       setTimeout(function () { document.documentElement.classList.remove('intro-pending'); }, 4000);
     }
   </script>
-  <script type="module" src="/src/home/main.js"></script>
-</head>
-<body>
-  <a class="skip-link" href="#contenido">Saltar al contenido</a>
-
-  <!-- NAVBAR compartido (src/shared/navbar.html, lo inserta vite.config.js) -->
-  <!-- navbar -->
+  </Fragment>
 
   <!-- Cubre la página durante los saltos a secciones del menú -->
   <div class="page-veil" aria-hidden="true"></div>
@@ -264,5 +240,6 @@
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
     <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.5 0-3-.4-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.4.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></symbol>
   </svg>
-</body>
-</html>
+
+  <script>import '../home/main.js';</script>
+</BaseLayout>

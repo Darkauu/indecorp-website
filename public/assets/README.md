@@ -45,11 +45,11 @@ Total: 20 imágenes × 2 formatos = **40 archivos**.
 | Archivo | Formato | Notas |
 |---|---|---|
 | `/favicon.svg` (en `public/`) | SVG | Reemplazar por el isotipo de la marca [NOMBRE]. |
-| Logo | SVG | El header y el footer usan un logo de texto provisional (`.logo` en `index.html`). |
+| Logo | SVG | El header y el footer usan un logo de texto provisional (`src/components/Navbar.astro` y los footers). |
 
 ## Contenido provisional (no son imágenes)
 
-- **Marca [NOMBRE]:** texto "INDECORP" en `index.html` y `CONFIG.brand` en `src/config.js`.
+- **Marca [NOMBRE]:** texto "INDECORP" en las páginas y componentes de `src/` y `CONFIG.brand` en `src/config.js`.
 - **WhatsApp [NÚMERO]:** `CONFIG.whatsapp` y `CONFIG.whatsappDisplay` en `src/config.js`. Todos los botones de WhatsApp se generan desde ahí.
-- **Teléfono del navbar [NÚMERO]:** `src/shared/navbar.html` (compartido por todas las páginas).
+- **Teléfono [NÚMERO]:** `CONFIG.phone` / `CONFIG.phoneHref` en `src/config.js` (navbar y footer de todas las páginas).
 - **Paleta [COLORES]:** variables en `:root` de `src/home/home.css`. Si cambia `--sand`, hay que reexportar la capa de polvo (#6 y #7) con ese mismo color base.
