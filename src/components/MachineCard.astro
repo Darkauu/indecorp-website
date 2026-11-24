@@ -1,0 +1,20 @@
+---
+/* Ficha de un equipo en el catálogo. `data-cat` y `data-text` los usan los filtros (src/scripts/site.js). */
+import Icon from './Icon.astro';
+import MachineShape from './MachineShape.astro';
+
+interface Props {
+  machine: {
+    model: string;
+    category: string;
+    type: string;
+    weight: string;
+    power: string;
+    specs: { label: string; value: string }[];
+    categoryData: { name: string; shape: string };
+  };
+}
+const { machine: m } = Astro.props;
+const searchText = `${m.model} ${m.type} ${m.categoryData.name}`.toLowerCase();
+---
+<article class="card machine" data-cat={m.category} data-text={searchText}><div class="ph" data-label={`Foto CAT ${m.model}`}><MachineShape shape={m.categoryData.shape} /></div><div class="card-body"><div><span class="brand-tag">CATERPILLAR</span></div><h3>CAT {m.model}</h3><div class="meta">{m.type}</div><dl class="specs"><div><dt>Peso operativo</dt><dd>{m.weight}</dd></div><div><dt>Potencia</dt><dd>{m.power}</dd></div>{m.specs.map((s) => <div><dt>{s.label}</dt><dd>{s.value}</dd></div>)}</dl><button class="btn btn--dark btn--block" data-quote={m.model}>Solicitar equipo <span class="arrow"><Icon name="arrow" size={16} /></span></button></div></article>

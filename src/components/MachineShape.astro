@@ -1,0 +1,10 @@
+---
+/* Silueta de maquinaria (placeholder hasta tener fotos reales). Ver src/lib/icons.js. */
+import { machineSvg } from '../lib/icons.js';
+
+interface Props {
+  shape: string;
+}
+const { shape } = Astro.props;
+---
+<Fragment set:html={machineSvg(shape)} />

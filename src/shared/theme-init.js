@@ -1,4 +1,4 @@
-/* Se inserta en línea al inicio del <head> de cada página (vite.config.js) para fijar el
+/* Se inserta en línea al inicio del <head> de cada página (src/layouts/BaseLayout.astro) para fijar el
    tema antes del primer pintado: la elección guardada o, si no hay, la del sistema operativo. */
 (function () {
   var theme = null;

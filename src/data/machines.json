@@ -1,0 +1,363 @@
+[
+  {
+    "id": "cat-313-gc",
+    "order": 10,
+    "model": "313 GC",
+    "category": "excavadoras",
+    "type": "Excavadora hidráulica",
+    "weight": "13 t",
+    "power": "94 HP",
+    "specs": [
+      {
+        "label": "Cucharón",
+        "value": "0.52 m³"
+      },
+      {
+        "label": "Prof. excavación",
+        "value": "5.1 m"
+      }
+    ]
+  },
+  {
+    "id": "cat-320",
+    "order": 20,
+    "model": "320",
+    "category": "excavadoras",
+    "type": "Excavadora hidráulica",
+    "weight": "22 t",
+    "power": "162 HP",
+    "specs": [
+      {
+        "label": "Cucharón",
+        "value": "1.19 m³"
+      },
+      {
+        "label": "Prof. excavación",
+        "value": "6.7 m"
+      }
+    ]
+  },
+  {
+    "id": "cat-336",
+    "order": 30,
+    "model": "336",
+    "category": "excavadoras",
+    "type": "Excavadora hidráulica",
+    "weight": "37 t",
+    "power": "311 HP",
+    "specs": [
+      {
+        "label": "Cucharón",
+        "value": "1.88 m³"
+      },
+      {
+        "label": "Prof. excavación",
+        "value": "7.4 m"
+      }
+    ]
+  },
+  {
+    "id": "cat-305-cr",
+    "order": 40,
+    "model": "305 CR",
+    "category": "mini-excavadoras",
+    "type": "Mini excavadora",
+    "weight": "5.3 t",
+    "power": "46 HP",
+    "specs": [
+      {
+        "label": "Cucharón",
+        "value": "0.18 m³"
+      },
+      {
+        "label": "Prof. excavación",
+        "value": "3.5 m"
+      }
+    ]
+  },
+  {
+    "id": "cat-308-cr",
+    "order": 50,
+    "model": "308 CR",
+    "category": "mini-excavadoras",
+    "type": "Mini excavadora",
+    "weight": "8.4 t",
+    "power": "70 HP",
+    "specs": [
+      {
+        "label": "Cucharón",
+        "value": "0.33 m³"
+      },
+      {
+        "label": "Prof. excavación",
+        "value": "4.4 m"
+      }
+    ]
+  },
+  {
+    "id": "cat-416",
+    "order": 60,
+    "model": "416",
+    "category": "retroexcavadoras",
+    "type": "Retroexcavadora",
+    "weight": "7.5 t",
+    "power": "74 HP",
+    "specs": [
+      {
+        "label": "Cuchara frontal",
+        "value": "1.0 m³"
+      },
+      {
+        "label": "Prof. excavación",
+        "value": "4.3 m"
+      }
+    ]
+  },
+  {
+    "id": "cat-420-xe",
+    "order": 70,
+    "model": "420 XE",
+    "category": "retroexcavadoras",
+    "type": "Retroexcavadora",
+    "weight": "8.2 t",
+    "power": "93 HP",
+    "specs": [
+      {
+        "label": "Cuchara frontal",
+        "value": "1.15 m³"
+      },
+      {
+        "label": "Prof. excavación",
+        "value": "4.6 m"
+      }
+    ]
+  },
+  {
+    "id": "cat-d4",
+    "order": 80,
+    "model": "D4",
+    "category": "tractores",
+    "type": "Tractor de oruga",
+    "weight": "13 t",
+    "power": "130 HP",
+    "specs": [
+      {
+        "label": "Hoja",
+        "value": "2.6 m³"
+      },
+      {
+        "label": "Ancho de hoja",
+        "value": "3.1 m"
+      }
+    ]
+  },
+  {
+    "id": "cat-d6",
+    "order": 90,
+    "model": "D6",
+    "category": "tractores",
+    "type": "Tractor de oruga",
+    "weight": "23 t",
+    "power": "215 HP",
+    "specs": [
+      {
+        "label": "Hoja",
+        "value": "5.6 m³"
+      },
+      {
+        "label": "Ancho de hoja",
+        "value": "3.9 m"
+      }
+    ]
+  },
+  {
+    "id": "cat-d8",
+    "order": 100,
+    "model": "D8",
+    "category": "tractores",
+    "type": "Tractor de oruga",
+    "weight": "39 t",
+    "power": "354 HP",
+    "specs": [
+      {
+        "label": "Hoja",
+        "value": "8.7 m³"
+      },
+      {
+        "label": "Ancho de hoja",
+        "value": "4.3 m"
+      }
+    ]
+  },
+  {
+    "id": "cat-950-gc",
+    "order": 110,
+    "model": "950 GC",
+    "category": "cargadores",
+    "type": "Cargador de ruedas",
+    "weight": "18.7 t",
+    "power": "225 HP",
+    "specs": [
+      {
+        "label": "Cucharón",
+        "value": "3.1 m³"
+      },
+      {
+        "label": "Carga de vuelco",
+        "value": "12 t"
+      }
+    ]
+  },
+  {
+    "id": "cat-966",
+    "order": 120,
+    "model": "966",
+    "category": "cargadores",
+    "type": "Cargador de ruedas",
+    "weight": "23.6 t",
+    "power": "303 HP",
+    "specs": [
+      {
+        "label": "Cucharón",
+        "value": "4.2 m³"
+      },
+      {
+        "label": "Carga de vuelco",
+        "value": "15 t"
+      }
+    ]
+  },
+  {
+    "id": "cat-120",
+    "order": 130,
+    "model": "120",
+    "category": "motoniveladoras",
+    "type": "Motoniveladora",
+    "weight": "15.6 t",
+    "power": "158 HP",
+    "specs": [
+      {
+        "label": "Ancho de hoja",
+        "value": "3.7 m"
+      },
+      {
+        "label": "Tracción",
+        "value": "6x4"
+      }
+    ]
+  },
+  {
+    "id": "cat-140",
+    "order": 140,
+    "model": "140",
+    "category": "motoniveladoras",
+    "type": "Motoniveladora",
+    "weight": "19.5 t",
+    "power": "213 HP",
+    "specs": [
+      {
+        "label": "Ancho de hoja",
+        "value": "3.7 m"
+      },
+      {
+        "label": "Tracción",
+        "value": "6x6"
+      }
+    ]
+  },
+  {
+    "id": "cat-cs54b",
+    "order": 150,
+    "model": "CS54B",
+    "category": "compactadoras",
+    "type": "Rodillo vibratorio",
+    "weight": "11.3 t",
+    "power": "131 HP",
+    "specs": [
+      {
+        "label": "Ancho de tambor",
+        "value": "2.13 m"
+      },
+      {
+        "label": "Tipo",
+        "value": "Liso / Pata de cabra"
+      }
+    ]
+  },
+  {
+    "id": "cat-cb10",
+    "order": 160,
+    "model": "CB10",
+    "category": "compactadoras",
+    "type": "Compactador de asfalto",
+    "weight": "10.3 t",
+    "power": "142 HP",
+    "specs": [
+      {
+        "label": "Ancho de tambor",
+        "value": "1.7 m"
+      },
+      {
+        "label": "Tipo",
+        "value": "Doble tambor"
+      }
+    ]
+  },
+  {
+    "id": "cat-262d3",
+    "order": 170,
+    "model": "262D3",
+    "category": "minicargadores",
+    "type": "Minicargador",
+    "weight": "3.8 t",
+    "power": "74 HP",
+    "specs": [
+      {
+        "label": "Carga nominal",
+        "value": "1 225 kg"
+      },
+      {
+        "label": "Implementos",
+        "value": "Cucharón, barredora"
+      }
+    ]
+  },
+  {
+    "id": "cat-th408d",
+    "order": 180,
+    "model": "TH408D",
+    "category": "telehandlers",
+    "type": "Manipulador telescópico",
+    "weight": "7.5 t",
+    "power": "100 HP",
+    "specs": [
+      {
+        "label": "Capacidad",
+        "value": "3.6 t"
+      },
+      {
+        "label": "Altura máx.",
+        "value": "7.3 m"
+      }
+    ]
+  },
+  {
+    "id": "cat-730",
+    "order": 190,
+    "model": "730",
+    "category": "camiones",
+    "type": "Camión articulado",
+    "weight": "23.5 t",
+    "power": "381 HP",
+    "specs": [
+      {
+        "label": "Carga útil",
+        "value": "28 t"
+      },
+      {
+        "label": "Tracción",
+        "value": "6x6"
+      }
+    ]
+  }
+]

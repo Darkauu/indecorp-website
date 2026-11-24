@@ -1,5 +1,5 @@
 /* =========================================================
-   Navbar compartido por todas las páginas (src/shared/navbar.html).
+   Navbar compartido por todas las páginas (src/components/Navbar.astro).
    Autocontenido: no depende de las variables de cada página.
    Sigue el tema de html[data-theme] (claro / oscuro).
    Solo se animan transform y opacity.

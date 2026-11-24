@@ -153,7 +153,7 @@ section[tabindex="-1"]:focus { outline: none; }
 :root[data-theme="dark"] .hero-dust img { filter: brightness(.13); }
 /* Relleno sólido bajo el polvo: aunque la capa suba, el corte con la sección siguiente nunca se ve */
 .hero-dust::after { content: ""; position: absolute; left: 0; right: 0; top: calc(100% - 2px); height: 100vh; background: var(--sand); }
-/* Estado inicial de la intro antes de que cargue el JS (lo activa un script inline en index.html).
+/* Estado inicial de la intro antes de que cargue el JS (lo activa un script inline en src/pages/index.astro).
    Coincide con los valores "from" de heroIntro() para que no haya salto al empezar la animación. */
 .intro-pending .hero-machine { opacity: 0; transform: translateX(12%); }
 .intro-pending .hero-copy > :not(h1) { opacity: 0; transform: translateY(24px); }

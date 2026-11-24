@@ -11,7 +11,7 @@
 
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-// Los estilos se cargan con <link> en index.html (no desde JS) para que no haya parpadeo sin estilos.
+// Los estilos los importa src/pages/index.astro: Astro los enlaza en el <head> (sin parpadeo sin estilos).
 
 import { CONFIG, waLink } from '../config.js';
 import { initPageTransitions } from '../page-transitions.js';

@@ -1,0 +1,72 @@
+[
+  {
+    "id": "excavadoras",
+    "order": 10,
+    "name": "Excavadoras",
+    "description": "Excavación profunda, zanjas y movimiento de tierras.",
+    "shape": "excavator"
+  },
+  {
+    "id": "mini-excavadoras",
+    "order": 20,
+    "name": "Mini excavadoras",
+    "description": "Equipos compactos para obras urbanas y espacios reducidos.",
+    "shape": "excavator"
+  },
+  {
+    "id": "retroexcavadoras",
+    "order": 30,
+    "name": "Retroexcavadoras",
+    "description": "Pala cargadora y retro en un solo equipo versátil.",
+    "shape": "backhoe"
+  },
+  {
+    "id": "tractores",
+    "order": 40,
+    "name": "Tractores de oruga",
+    "description": "Bulldozers para empuje, corte y nivelación.",
+    "shape": "dozer"
+  },
+  {
+    "id": "cargadores",
+    "order": 50,
+    "name": "Cargadores frontales",
+    "description": "Carga masiva y acarreo de materiales en patio y cantera.",
+    "shape": "loader"
+  },
+  {
+    "id": "motoniveladoras",
+    "order": 60,
+    "name": "Motoniveladoras",
+    "description": "Nivelación y perfilado de precisión para vialidad.",
+    "shape": "grader"
+  },
+  {
+    "id": "compactadoras",
+    "order": 70,
+    "name": "Compactadoras",
+    "description": "Rodillos lisos y pata de cabra para suelos y asfalto.",
+    "shape": "roller"
+  },
+  {
+    "id": "minicargadores",
+    "order": 80,
+    "name": "Minicargadores",
+    "description": "Carga y limpieza en espacios reducidos.",
+    "shape": "skid"
+  },
+  {
+    "id": "telehandlers",
+    "order": 90,
+    "name": "Manipuladores telescópicos",
+    "description": "Elevación y manipulación de cargas en altura.",
+    "shape": "telehandler"
+  },
+  {
+    "id": "camiones",
+    "order": 100,
+    "name": "Camiones articulados",
+    "description": "Acarreo de material en terrenos exigentes.",
+    "shape": "truck"
+  }
+]

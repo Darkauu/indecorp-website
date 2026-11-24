@@ -4,8 +4,8 @@
    Para cambiar el acento basta con editar --accent.
    ========================================================= */
 
-@import '../../src/page-transitions.css';
-@import '../../src/shared/navbar.css';
+@import '../page-transitions.css';
+@import '../shared/navbar.css';
 @import 'lenis/dist/lenis.css';
 @import '@fontsource/montserrat/latin-700.css';
 @import '@fontsource/montserrat/latin-800.css';
@@ -320,7 +320,7 @@ p { margin: 0 0 1em; }
 .form-success { display: none; text-align: center; padding: 20px 0; }
 .form-success__link { color: var(--accent-dark); font-weight: 600; text-decoration: underline; }
 
-/* Buscador de equipos del formulario (assets/js/machine-search.js) */
+/* Buscador de equipos del formulario (src/scripts/machine-search.js) */
 .machine-search { position: relative; }
 .machine-search__box { position: relative; }
 .machine-search__box svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--gray-500); pointer-events: none; }
